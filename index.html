@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ultimate Browser Gaming Hub</title>
+    <style>
+        /* =========================================
+           CSS VARIABLES & DESIGN SYSTEM
+           ========================================= */
+        :root {
+            --bg-obsidian: #08080c;
+            --bg-glass: rgba(255, 255, 255, 0.04);
+            --bg-glass-hover: rgba(255, 255, 255, 0.08);
+            
+            --neon-cyan: #00f3ff;
+            --neon-magenta: #ff00ea;
+            --neon-gold: #ffd700;
+            
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-glass: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-obsidian);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient Glowing Background Orbs */
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            width: 70vw;
+            height: 70vw;
+            border-radius: 50%;
+            filter: blur(150px);
+            z-index: -1;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        body::before {
+            top: -20%; left: -10%;
+            background: radial-gradient(circle, var(--neon-cyan), transparent 60%);
+        }
+
+        body::after {
+            bottom: -20%; right: -10%;
+            background: radial-gradient(circle, var(--neon-magenta), transparent 60%);
+        }
+
+        /* =========================================
+           TYPOGRAPHY & HERO
+           ========================================= */
+        header {
+            text-align: center;
+            padding: 6rem 1.5rem 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            margin-bottom: 1rem;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.2), 0 0 40px rgba(0, 243, 255, 0.4);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--neon-gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 500;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+
+        /* =========================================
+           MINI GAME: NEON TIC-TAC-TOE
+           ========================================= */
+        .minigame-container {
+            max-width: 380px;
+            margin: 0 auto 5rem;
+            padding: 2rem;
+            background: var(--bg-glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            text-align: center;
+        }
+
+        .status-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            min-height: 1.5em;
+            transition: color 0.3s ease;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .cell {
+            aspect-ratio: 1;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            font-size: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 800;
+        }
+
+        .cell:hover {
+            background: var(--bg-glass-hover);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .cell.x {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 15px var(--neon-cyan);
+        }
+
+        .cell.o {
+            color: var(--neon-magenta);
+            text-shadow: 0 0 15px var(--neon-magenta);
+        }
+
+        .reset-btn {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-glass);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .reset-btn:hover {
+            border-color: var(--neon-gold);
+            color: var(--neon-gold);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+
+        /* =========================================
+           DIRECTORY LAYOUT & CARDS
+           ========================================= */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem 6rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .title-cyan { color: var(--neon-cyan); text-shadow: 0 0 15px rgba(0, 243, 255, 0.3); }
+        .title-magenta { color: var(--neon-magenta); text-shadow: 0 0 15px rgba(255, 0, 234, 0.3); margin-top: 6rem; }
+
+        .disclaimer {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            padding: 1.2rem;
+            background: rgba(255, 215, 0, 0.05);
+            border-left: 4px solid var(--neon-gold);
+            border-radius: 0 12px 12px 0;
+            color: var(--neon-gold);
+            font-size: 0.95rem;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            background: var(--bg-glass-hover);
+        }
+
+        .card-cyan:hover {
+            border-color: rgba(0, 243, 255, 0.4);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 243, 255, 0.15);
+        }
+
+        .card-magenta:hover {
+            border-color: rgba(255, 0, 234, 0.4);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 0, 234, 0.15);
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .btn-cyan { border: 1px solid var(--neon-cyan); color: var(--neon-cyan); }
+        .btn-cyan:hover {
+            background: var(--neon-cyan);
+            color: var(--bg-obsidian);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+        }
+
+        .btn-magenta { border: 1px solid var(--neon-magenta); color: var(--neon-magenta); }
+        .btn-magenta:hover {
+            background: var(--neon-magenta);
+            color: var(--bg-obsidian);
+            box-shadow: 0 0 20px rgba(255, 0, 234, 0.5);
+        }
+
+        /* Tekken Multi-Button Layout */
+        .button-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        @media (max-width: 600px) {
+            .button-group { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>The Ultimate Browser Gaming Hub</h1>
+        <p class="subtitle">Find the best modern and retro games on the web</p>
+    </header>
+
+    <section class="minigame-container">
+        <div class="status-text" id="gameStatus">Player X's Turn</div>
+        <div class="board">
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+        </div>
+        <button class="reset-btn" id="resetBtn">Reset Grid</button>
+    </section>
+
+    <main>
+        <div class="disclaimer">
+            <strong>Note:</strong> These are full PlayStation games running in your browser. The load time and smoothness of the gameplay depend heavily on your internet connection speed.
+        </div>
+        
+        <h2 class="section-title title-cyan">Top 10 Modern Browser Games</h2>
+        <div class="grid">
+            <article class="card card-cyan">
+                <h3>Poki</h3>
+                <p>A massive, smooth library of casual, action, and puzzle games that work flawlessly across all devices.</p>
+                <a href="https://poki.com" target="_blank" class="btn btn-cyan">Play Now</a>
+            </article>
+            <article class="card card-cyan">
+                <h3>CrazyGames</h3>
+                <p>The go-to spot for 3D graphics, multiplayer .io games, and intense web-based shooters.</p>
+                <a href="https://crazygames.com" target="_blank" class="btn btn-cyan">Play Now</a>
+            </article>
+            <article class="card card-cyan">
+                <h3>itch.io</h3>
+                <p>The ultimate hub for independent developers and incredibly unique, experimental web games.</p>
+                <a href="https://itch.io" target="_blank" class="btn btn-cyan">Play Now</a>
+            </article>
+            <article class="card card-cyan">
+                <h3>Coolmath Games</h3>
+                <p>An iconic site hosting highly addictive puzzle, strategy, logic, and thinking games.</p>
+                <a href="https://coolmathgames.com" target="_blank" class="btn btn-cyan">Play Now</a>
+            </article>
+            <article class="card card-cyan">
+                <h3>Kongregate</h3>
+                <p>A classic titan of browser gaming hosting thousands of deep strategy, idle, and RPG games.</p>
+                <a href="https://kongregate.com" target="_blank" class="btn btn-cyan">Play Now</a>
+            </article>
+            <article class="card card-cyan">
+                <h3>Armor Games</h3>
+                <p>A legendary name maintaining a remarkably high standard for quality tower defense and MMO titles.</p>
+                <a href="https://armorgames.com" target="_blank" class="btn btn-cyan">Play Now</a>
+            </article>
+            <article class="card card-cyan">
+                <h3>Board Game Arena</h3>
+                <p>Play hundreds of premium, real-world tabletop games online directly against other people.</p>
+                <a href="https://boardgamearena.com" target="_blank" class="btn btn-cyan">Play Now</a>
+            </article>
+            <article class="card card-cyan">
+                <h3>Y8</h3>
+                <p>A massive archive boasting niche arcade hits, classic web games, and retro multiplayer titles.</p>
+                <a href="https://y8.com" target="_blank" class="btn btn-cyan">Play Now</a>
+            </article>
+            <article class="card card-cyan">
+                <h3>Addicting Games</h3>
+                <p>Quick, funny, and highly replayable arcade-style games perfect for killing downtime instantly.</p>
+                <a href="https://addictinggames.com" target="_blank" class="btn btn-cyan">Play Now</a>
+            </article>
+            <article class="card card-cyan">
+                <h3>Arkadium</h3>
+                <p>The absolute best place for relaxed, high-quality Solitaire, Mahjong, crosswords, and Sudoku.</p>
+                <a href="https://arkadium.com" target="_blank" class="btn btn-cyan">Play Now</a>
+            </article>
+        </div>
+
+        <h2 class="section-title title-magenta">Play Tekken 1, 2 & 3 Directly in Your Browser</h2>
+        
+        <div class="grid">
+            <article class="card card-magenta">
+                <h3>RetroGames.cc</h3>
+                <p>Massive library for emulated games, running the PS1 Tekken trilogy incredibly smoothly.</p>
+                <div class="button-group">
+                    <a href="https://www.retrogames.cc/psx-games/tekken.html" target="_blank" class="btn btn-magenta">Tekken 1</a>
+                    <a href="https://www.retrogames.cc/psx-games/tekken-2.html" target="_blank" class="btn btn-magenta">Tekken 2</a>
+                    <a href="https://www.retrogames.cc/psx-games/tekken-3.html" target="_blank" class="btn btn-magenta">Tekken 3</a>
+                </div>
+            </article>
+            
+            <article class="card card-magenta">
+                <h3>ClassicReload.com</h3>
+                <p>Focused heavily on software preservation; a fantastic hub for booting up classic fighting games.</p>
+                <div class="button-group">
+                    <a href="https://classicreload.com/tekken.html" target="_blank" class="btn btn-magenta">Tekken 1</a>
+                    <a href="https://classicreload.com/tekken-2.html" target="_blank" class="btn btn-magenta">Tekken 2</a>
+                    <a href="https://classicreload.com/tekken-3.html" target="_blank" class="btn btn-magenta">Tekken 3</a>
+                </div>
+            </article>
+
+            <article class="card card-magenta">
+                <h3>ArcadeSpot.com</h3>
+                <p>A beautifully clean interface hosting both original Tekken arcade hardware versions and console ports.</p>
+                <div class="button-group">
+                    <a href="https://arcadespot.com/game/tekken/" target="_blank" class="btn btn-magenta">Tekken 1</a>
+                    <a href="https://arcadespot.com/game/tekken-2/" target="_blank" class="btn btn-magenta">Tekken 2</a>
+                    <a href="https://arcadespot.com/game/tekken-3/" target="_blank" class="btn btn-magenta">Tekken 3</a>
+                </div>
+            </article>
+
+            <article class="card card-magenta">
+                <h3>MyEmulator.online</h3>
+                <p>A sleek platform explicitly built for browser-based emulation, handling 32-bit era 3D games perfectly.</p>
+                <div class="button-group">
+                    <a href="https://myemulator.online/ps1/tekken" target="_blank" class="btn btn-magenta">Tekken 1</a>
+                    <a href="https://myemulator.online/ps1/tekken-2" target="_blank" class="btn btn-magenta">Tekken 2</a>
+                    <a href="https://myemulator.online/ps1/tekken-3" target="_blank" class="btn btn-magenta">Tekken 3</a>
+                </div>
+            </article>
+
+            <article class="card card-magenta">
+                <h3>PlayRetroGames.com</h3>
+                <p>Dedicated hub for the 8-bit to 32-bit eras, featuring seamless built-in controller mapping support.</p>
+                <div class="button-group">
+                    <a href="https://www.playretrogames.com/game/tekken" target="_blank" class="btn btn-magenta">Tekken 1</a>
+                    <a href="https://www.playretrogames.com/game/tekken-2" target="_blank" class="btn btn-magenta">Tekken 2</a>
+                    <a href="https://www.playretrogames.com/game/tekken-3" target="_blank" class="btn btn-magenta">Tekken 3</a>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cells = document.querySelectorAll('.cell');
+            const statusText = document.getElementById('gameStatus');
+            const resetBtn = document.getElementById('resetBtn');
+            
+            let board = ["", "", "", "", "", "", "", "", ""];
+            let currentPlayer = "X";
+            let gameActive = true;
+
+            const winConditions = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8], // Horizontal
+                [0, 3, 6], [1, 4, 7], [2, 5, 8], // Vertical
+                [0, 4, 8], [2, 4, 6]             // Diagonal
+            ];
+
+            function updateStatus() {
+                statusText.textContent = `Player ${currentPlayer}'s Turn`;
+                statusText.style.color = currentPlayer === "X" ? "var(--neon-cyan)" : "var(--neon-magenta)";
+                statusText.style.textShadow = `0 0 10px ${currentPlayer === "X" ? "rgba(0, 243, 255, 0.4)" : "rgba(255, 0, 234, 0.4)"}`;
+            }
+
+            function checkWin() {
+                let roundWon = false;
+
+                for (let i = 0; i < winConditions.length; i++) {
+                    const [a, b, c] = winConditions[i];
+                    if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+                        roundWon = true;
+                        break;
+                    }
+                }
+
+                if (roundWon) {
+                    statusText.textContent = `PLAYER ${currentPlayer} WINS!`;
+                    statusText.style.color = "var(--neon-gold)";
+                    statusText.style.textShadow = "0 0 15px var(--neon-gold)";
+                    gameActive = false;
+                    return;
+                }
+
+                if (!board.includes("")) {
+                    statusText.textContent = "IT'S A DRAW!";
+                    statusText.style.color = "var(--text-main)";
+                    statusText.style.textShadow = "none";
+                    gameActive = false;
+                    return;
+                }
+
+                currentPlayer = currentPlayer === "X" ? "O" : "X";
+                updateStatus();
+            }
+
+            cells.forEach(cell => {
+                cell.addEventListener('click', (e) => {
+                    const index = e.target.getAttribute('data-index');
+
+                    if (board[index] !== "" || !gameActive) return;
+
+                    board[index] = currentPlayer;
+                    e.target.textContent = currentPlayer;
+                    e.target.classList.add(currentPlayer.toLowerCase());
+
+                    checkWin();
+                });
+            });
+
+            resetBtn.addEventListener('click', () => {
+                board = ["", "", "", "", "", "", "", "", ""];
+                currentPlayer = "X";
+                gameActive = true;
+                
+                cells.forEach(cell => {
+                    cell.textContent = "";
+                    cell.classList.remove('x', 'o');
+                });
+                
+                updateStatus();
+            });
+
+            // Initialize game state
+            updateStatus();
+        });
+    </script>
+</body>
+</html>
