@@ -1,0 +1,2826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NeiharDario</title>
+  <meta name="description" content="NeiharDario is a 100% free, privacy-first Indian financial, tax, mathematical, and health multi-calculator portal with RBI EMI amortization, SIP compounding, GST & Reverse GST, Income Tax New vs Old Regime, Exact Age, Percentage, Date Difference, and Indian ICMR BMI guidelines." />
+
+  <!-- JSON-LD Structured Data: WebApplication + FAQPage (7 Exact Questions) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "NeiharDario",
+        "url": "https://neihar.in/",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "All",
+        "inLanguage": ["en-IN", "hi-IN"],
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "INR"
+        },
+        "description": "Free client-side Indian financial, tax, mathematical, and health calculators including Home/Car/Personal Loan EMI with Amortization Schedule, SIP Mutual Fund Calculator, GST Inclusive/Exclusive Calculator, Income Tax New vs Old Regime, Exact Age, 3-in-1 Percentage, Date Difference, and Indian Asian-Indian BMI Cut-off Calculator."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How is my monthly loan EMI and amortization schedule calculated?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Your Equated Monthly Installment (EMI) is calculated using the standard reducing-balance compound interest formula: EMI = [P × r × (1 + r)^n] / [(1 + r)^n − 1], where P is the principal loan amount, r is the monthly interest rate (Annual Rate ÷ 12 ÷ 100), and n is the total number of monthly installments. In the amortization schedule, each month's interest is calculated on the remaining opening principal balance (Opening Balance × r), and the remaining portion of the EMI (EMI − Monthly Interest) goes toward reducing your principal balance."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does compounding work in a Monthly SIP Calculator?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A Systematic Investment Plan (SIP) uses the annuity-due compound interest formula: FV = P × [((1 + i)^n − 1) / i] × (1 + i), where P is your monthly investment, i is the periodic monthly return rate (Annual Return Rate ÷ 12 ÷ 100), and n is the total number of months (Years × 12). Each monthly contribution compounds independently for the remaining months of your tenure, allowing returns to generate further returns."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I add or remove GST from an invoice, and where can I verify official GST rates?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "To add GST to a pre-tax base amount (GST Exclusive), multiply the base price by (GST Rate ÷ 100) and add it to the base price. To remove GST from a tax-inclusive MRP or invoice (Reverse GST), divide the gross amount by [1 + (GST Rate ÷ 100)] to find the exact pre-tax base price. For Intra-State transactions within the same state, total GST is split 50:50 into CGST and SGST; for Inter-State transactions across state borders, 100% is charged as IGST. You can verify current HSN and SAC tax rates directly on the official Indian GST Portal at https://www.gst.gov.in."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why does the BMI Calculator show different overweight and obesity cut-offs for Indians?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Clinical guidelines issued by the Indian Ministry of Health, the Indian Council of Medical Research (ICMR), and the Consensus Statement for Asian Indians establish stricter, lower BMI thresholds than the standard WHO table because South Asians exhibit higher visceral abdominal fat and higher insulin resistance at lower body weights. Specifically, Indian guidelines define Normal BMI as 18.0 to 22.9 kg/m² (vs. 18.5 to 24.9 in WHO), Overweight as 23.0 to 24.9 kg/m² (vs. 25.0 to 29.9 in WHO), and Obesity as 25.0 kg/m² or higher (vs. 30.0 or higher in WHO)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this website a loan provider or affiliated with any bank or the RBI?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. NeiharDario is strictly an independent mathematical and informational calculator utility. We are NOT a bank, Non-Banking Financial Company (NBFC), Lending Service Provider (LSP), financial advisor, or affiliated with the Reserve Bank of India (RBI). We do not offer, sanction, broker, or disburse loans of any kind, and we never collect KYC documents, PAN numbers, or borrower leads."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How accurately do the Age and Date Difference calculators handle leap years and varying month lengths?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Both calculators use exact Gregorian calendar arithmetic rather than approximate 30-day month averages. They automatically account for 28-day, 29-day (leap years divisible by 4, excluding century years not divisible by 400), 30-day, and 31-day months when computing completed years, months, and days, as well as exact weekday vs. weekend counts."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is the financial and personal data I type into these calculators stored or shared?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Every calculation on this portal executes 100% locally inside your web browser using client-side JavaScript. Your salary, loan figures, tax deductions, birthdates, and health measurements never leave your device, are never transmitted to any backend server, and are never shared with third parties."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    /* ==========================================================================
+       WCAG AAA HIGH-CONTRAST & ZERO-CLS CORE CSS3 ARCHITECTURE
+       ========================================================================== */
+    :root {
+      --bg-page: #f1f5f9;
+      --bg-surface: #ffffff;
+      --bg-subtle: #f8fafc;
+      --bg-navy: #0f172a;
+      --bg-blue-tint: #eff6ff;
+      --bg-emerald-tint: #ecfdf5;
+      --bg-amber-tint: #fffbeb;
+      --bg-rose-tint: #fff1f2;
+
+      --text-primary: #090d16;
+      --text-secondary: #1e293b;
+      --text-muted: #334155;
+      --text-on-dark: #ffffff;
+
+      --brand-blue: #1d4ed8;
+      --brand-blue-dark: #1e3a8a;
+      --brand-emerald: #047857;
+      --brand-amber: #b45309;
+      --brand-rose: #be123c;
+
+      --border-strong: #334155;
+      --border-card: #94a3b8;
+      --border-light: #cbd5e1;
+
+      --radius-lg: 14px;
+      --radius-md: 10px;
+      --radius-sm: 8px;
+      --shadow-card: 0 2px 8px rgba(15, 23, 42, 0.08);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans Devanagari", sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-primary);
+      line-height: 1.6;
+      top: 0px !important;
+      position: static !important;
+    }
+
+    /* Accessibility Large Text Mode */
+    body.large-text-mode {
+      font-size: 112%;
+    }
+
+    /* Ultra High Contrast Mode */
+    body.ultra-contrast-mode {
+      --bg-page: #ffffff;
+      --border-card: #000000;
+      --text-secondary: #000000;
+      --text-muted: #0f172a;
+    }
+
+    /* Force-hide Google Translate top iframe banner to guarantee zero CLS */
+    .goog-te-banner-frame.skiptranslate,
+    .goog-te-gadget-icon,
+    #goog-gt-tt,
+    .goog-te-balloon-frame {
+      display: none !important;
+    }
+    .goog-text-highlight {
+      background: transparent !important;
+      box-shadow: none !important;
+    }
+    #google_translate_element {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+    }
+
+    /* Top Trust & Accessibility Strip */
+    .top-utility-bar {
+      background-color: #020617;
+      color: #f8fafc;
+      padding: 8px 16px;
+      border-bottom: 2px solid #1e293b;
+      font-size: 0.82rem;
+    }
+    .top-utility-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .trust-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: #064e3b;
+      color: #a7f3d0;
+      border: 1px solid #10b981;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+    .top-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Custom Language Toggle [ English | हिन्दी ] */
+    .lang-toggle-group {
+      display: inline-flex;
+      align-items: center;
+      background-color: #1e293b;
+      border: 2px solid #64748b;
+      border-radius: var(--radius-sm);
+      padding: 2px;
+    }
+    .lang-btn {
+      appearance: none;
+      border: none;
+      background: transparent;
+      color: #e2e8f0;
+      font-weight: 800;
+      font-size: 0.82rem;
+      padding: 5px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.15s, color 0.15s;
+    }
+    .lang-btn.active {
+      background-color: #2563eb;
+      color: #ffffff;
+    }
+    .lang-divider {
+      color: #94a3b8;
+      font-weight: 700;
+      padding: 0 2px;
+      user-select: none;
+    }
+
+    .a11y-btn {
+      background-color: #1e293b;
+      color: #fde68a;
+      border: 1.5px solid #64748b;
+      padding: 5px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 0.78rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .a11y-btn:hover {
+      background-color: #334155;
+    }
+
+    /* Main Site Header */
+    .site-header {
+      background-color: var(--bg-surface);
+      border-bottom: 2px solid var(--border-card);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+    }
+    .header-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 12px 16px;
+    }
+    .brand-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 10px;
+    }
+    .brand-identity {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .brand-logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background-color: var(--brand-blue-dark);
+      border: 2px solid #020617;
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .brand-title {
+      font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .brand-badge {
+      font-size: 0.72rem;
+      font-weight: 800;
+      background-color: #fef3c7;
+      color: #78350f;
+      border: 1.5px solid #f59e0b;
+      padding: 2px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+    .brand-sub {
+      margin: 2px 0 0 0;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .Quick-nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .Quick-nav-links a {
+      text-decoration: none;
+      font-size: 0.84rem;
+      font-weight: 800;
+      color: var(--text-secondary);
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border-light);
+      background-color: var(--bg-subtle);
+    }
+    .Quick-nav-links a:hover {
+      background-color: var(--bg-blue-tint);
+      border-color: var(--brand-blue);
+      color: var(--brand-blue-dark);
+    }
+
+    /* 8-Calculator Tab Bar Above the Fold */
+    .calc-tabs-nav {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 10px 0 4px 0;
+      border-top: 2px solid #e2e8f0;
+      scrollbar-width: thin;
+    }
+    .calc-tab-btn {
+      appearance: none;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 15px;
+      border-radius: var(--radius-md);
+      border: 2px solid var(--border-card);
+      background-color: #ffffff;
+      color: var(--text-primary);
+      font-size: 0.86rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .calc-tab-btn:hover {
+      background-color: var(--bg-blue-tint);
+      border-color: var(--brand-blue);
+    }
+    .calc-tab-btn.active {
+      background-color: var(--brand-blue-dark);
+      color: #ffffff;
+      border-color: #020617;
+      box-shadow: 0 3px 8px rgba(30, 58, 138, 0.3);
+    }
+
+    /* ==========================================================================
+       70/30 DESKTOP GRID LAYOUT (100% STACKED ON MOBILE) + ZERO CLS
+       ========================================================================== */
+    .portal-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px 16px 48px 16px;
+    }
+    .layout-grid-70-30 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    @media (min-width: 1024px) {
+      .layout-grid-70-30 {
+        grid-template-columns: minmax(0, 7fr) minmax(300px, 3fr);
+      }
+    }
+
+    /* AdSense Safety Buffer: Strict >=28px vertical margin between controls and ad zones */
+    .adsense-safe-zone {
+      margin-top: 32px !important;
+      margin-bottom: 32px !important;
+      padding-top: 4px;
+    }
+    .sidebar-sticky-wrap {
+      position: sticky;
+      top: 148px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      margin-top: 28px; /* Enforces >=28px vertical separation on mobile stacked view */
+    }
+    @media (min-width: 1024px) {
+      .sidebar-sticky-wrap {
+        margin-top: 0;
+      }
+    }
+    .ad-placeholder-box {
+      width: 100%;
+      max-width: 300px;
+      min-height: 600px;
+      margin: 0 auto;
+      background: repeating-linear-gradient(
+        -45deg,
+        #f8fafc,
+        #f8fafc 12px,
+        #f1f5f9 12px,
+        #f1f5f9 24px
+      );
+      border: 2px dashed #64748b;
+      border-radius: var(--radius-lg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      color: var(--text-muted);
+    }
+    .ad-placeholder-label {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background-color: #e2e8f0;
+      color: #1e293b;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+
+    /* Card Containers */
+    .card-box {
+      background-color: var(--bg-surface);
+      border: 2px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 28px;
+    }
+    .calc-panel {
+      display: none;
+    }
+    .calc-panel.active {
+      display: block;
+    }
+
+    .calc-header {
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .calc-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background-color: var(--bg-blue-tint);
+      color: var(--brand-blue-dark);
+      border: 1.5px solid #93c5fd;
+      margin-bottom: 6px;
+    }
+    .calc-title {
+      font-size: 1.55rem;
+      font-weight: 900;
+      color: var(--text-primary);
+      margin: 0 0 6px 0;
+    }
+    .calc-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin: 0;
+    }
+
+    /* Calculator 2-Column Inner Workspace */
+    .calc-workspace-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    @media (min-width: 768px) {
+      .calc-workspace-grid {
+        grid-template-columns: 1fr 1.1fr;
+      }
+    }
+
+    /* Form Controls */
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-label-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    label {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+    .input-number,
+    .input-date,
+    .input-select {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      background-color: var(--bg-blue-tint);
+      border: 2px solid var(--brand-blue);
+      border-radius: var(--radius-sm);
+      outline: none;
+    }
+    .input-number-inline {
+      width: 155px;
+      text-align: right;
+      padding: 7px 10px;
+      font-size: 0.98rem;
+      font-weight: 900;
+      color: var(--brand-blue-dark);
+      background-color: var(--bg-blue-tint);
+      border: 2px solid var(--brand-blue);
+      border-radius: var(--radius-sm);
+    }
+    .input-number:focus,
+    .input-number-inline:focus,
+    .input-date:focus,
+    .input-select:focus {
+      box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.25);
+    }
+
+    .words-helper {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--brand-emerald);
+      text-align: right;
+      margin: 4px 0 6px 0;
+      min-height: 1.2em;
+    }
+
+    /* High-Contrast Accessible Range Slider */
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 10px;
+      background: #cbd5e1;
+      border: 1.5px solid #475569;
+      border-radius: 999px;
+      outline: none;
+      margin: 6px 0;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--brand-blue-dark);
+      border: 3px solid #ffffff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+    }
+    input[type="range"]::-moz-range-thumb {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--brand-blue-dark);
+      border: 3px solid #ffffff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+    }
+
+    /* Quick Chips */
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .quick-chip {
+      appearance: none;
+      background-color: #eff6ff;
+      color: #1e3a8a;
+      border: 1.5px solid #60a5fa;
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.12s;
+    }
+    .quick-chip:hover,
+    .quick-chip.active {
+      background-color: var(--brand-blue-dark);
+      color: #ffffff;
+      border-color: #020617;
+    }
+
+    /* Segmented Toggle Buttons */
+    .segmented-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .seg-btn {
+      appearance: none;
+      padding: 10px 12px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      border-radius: var(--radius-sm);
+      border: 2px solid var(--border-card);
+      background-color: #ffffff;
+      color: var(--text-primary);
+      cursor: pointer;
+    }
+    .seg-btn.active {
+      background-color: var(--brand-blue-dark);
+      color: #ffffff;
+      border-color: #020617;
+    }
+
+    /* Primary Submit & Action Buttons */
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+      margin-bottom: 28px; /* Enforces >=28px buffer from any adjacent elements */
+    }
+    .btn-primary {
+      appearance: none;
+      background-color: var(--brand-blue-dark);
+      color: #ffffff;
+      border: 2px solid #020617;
+      padding: 10px 18px;
+      font-size: 0.9rem;
+      font-weight: 800;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background-color: #1d4ed8;
+    }
+    .btn-secondary {
+      appearance: none;
+      background-color: #f1f5f9;
+      color: var(--text-primary);
+      border: 2px solid var(--border-strong);
+      padding: 10px 16px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+    }
+    .btn-secondary:hover {
+      background-color: #e2e8f0;
+    }
+
+    /* Output KPI Grid */
+    .output-region {
+      background-color: var(--bg-subtle);
+      border: 2px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 18px;
+    }
+    .kpi-hero {
+      background-color: var(--bg-navy);
+      color: #ffffff;
+      padding: 16px;
+      border-radius: var(--radius-md);
+      border: 2px solid #020617;
+      margin-bottom: 14px;
+    }
+    .kpi-hero-label {
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #fcd34d;
+      letter-spacing: 0.05em;
+    }
+    .kpi-hero-value {
+      font-size: 1.85rem;
+      font-weight: 900;
+      margin: 4px 0;
+      color: #ffffff;
+    }
+    .kpi-hero-sub {
+      font-size: 0.82rem;
+      color: #bfdbfe;
+      font-weight: 600;
+    }
+
+    .kpi-sub-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .kpi-mini-card {
+      background-color: #ffffff;
+      border: 2px solid var(--border-card);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+    }
+    .kpi-mini-label {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .kpi-mini-val {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: var(--text-primary);
+      margin-top: 4px;
+    }
+
+    /* Interactive SVG Donut Chart Container (Zero CLS Fixed Aspect) */
+    .svg-chart-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      background-color: #ffffff;
+      border: 2px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      min-height: 190px;
+    }
+    .donut-svg {
+      width: 150px;
+      height: 150px;
+      transform: rotate(-90deg);
+      flex-shrink: 0;
+    }
+    .chart-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 800;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .legend-swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      border: 1px solid #020617;
+      flex-shrink: 0;
+    }
+
+    /* Scrollable Schedule & Comparison Tables */
+    .table-scroll-box {
+      max-height: 360px;
+      overflow: auto;
+      border: 2px solid var(--border-card);
+      border-radius: var(--radius-md);
+      margin-top: 14px;
+    }
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      background-color: #ffffff;
+    }
+    table.data-table th {
+      background-color: var(--bg-navy);
+      color: #ffffff;
+      font-weight: 800;
+      text-align: left;
+      padding: 10px 12px;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+    table.data-table th.num,
+    table.data-table td.num {
+      text-align: right;
+    }
+    table.data-table td {
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--border-light);
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    table.data-table tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+    table.data-table tr.highlight-row {
+      background-color: #ecfdf5;
+      font-weight: 900;
+    }
+
+    /* Official Link Callout Box */
+    .official-callout {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: var(--radius-md);
+      background-color: var(--bg-amber-tint);
+      border: 2px solid #f59e0b;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #78350f;
+    }
+    .official-callout a {
+      color: #1e3a8a;
+      font-weight: 900;
+      text-decoration: underline;
+    }
+
+    /* Mandatory Non-Lender Legal Disclaimer Banner */
+    .disclaimer-banner {
+      background-color: var(--bg-rose-tint);
+      border: 3px solid var(--brand-rose);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      color: #881337;
+    }
+    .disclaimer-title {
+      font-size: 1.05rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin: 0 0 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #9f1239;
+    }
+    .disclaimer-text {
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin: 0;
+      line-height: 1.65;
+    }
+
+    /* FAQ Accordion Styles */
+    .faq-item {
+      border: 2px solid var(--border-card);
+      border-radius: var(--radius-md);
+      background-color: #ffffff;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .faq-item summary {
+      padding: 14px 18px;
+      font-size: 0.98rem;
+      font-weight: 800;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background-color: var(--bg-subtle);
+      color: var(--text-primary);
+    }
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+    .faq-item[open] summary {
+      background-color: var(--bg-blue-tint);
+      color: var(--brand-blue-dark);
+      border-bottom: 2px solid var(--border-light);
+    }
+    .faq-answer {
+      padding: 16px 18px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    /* Toast Notification */
+    .toast-box {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+      background-color: #020617;
+      color: #ffffff;
+      border: 2px solid #fbbf24;
+      border-radius: var(--radius-md);
+      padding: 12px 18px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+      display: none;
+    }
+    .toast-box.show {
+      display: block;
+    }
+
+    /* Print Styles for Amortization PDF Export */
+    @media print {
+      .top-utility-bar,
+      .site-header,
+      .sidebar-sticky-wrap,
+      .btn-row {
+        display: none !important;
+      }
+      .layout-grid-70-30 {
+        display: block !important;
+      }
+      .table-scroll-box {
+        max-height: none !important;
+        overflow: visible !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hidden Google Translate Mount Point -->
+  <div id="google_translate_element" aria-hidden="true"></div>
+
+  <!-- Top Utility, Accessibility & Forced Google Translate Bar -->
+  <div class="top-utility-bar">
+    <div class="top-utility-inner">
+      <div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px;">
+        <span class="trust-pill">✓ 100% Client-Side Privacy • Zero CLS • No Sign-Up</span>
+        <span>Indian FinTech &amp; Health Standards (RBI • GSTN • CBDT • ICMR-NIN)</span>
+      </div>
+
+      <div class="top-controls">
+        <button type="button" id="a11yLargeTextBtn" class="a11y-btn" title="Toggle Larger Font Size">A+ Large Text</button>
+        <button type="button" id="a11yContrastBtn" class="a11y-btn" title="Toggle Ultra-Bold Contrast Borders">◐ High Contrast</button>
+
+        <!-- Custom Forced Google Translate Toggle [ English | हिन्दी ] -->
+        <div class="lang-toggle-group" role="group" aria-label="Language Selector">
+          <button type="button" id="btnLangEn" class="lang-btn active" data-lang="en">[ English</button>
+          <span class="lang-divider">|</span>
+          <button type="button" id="btnLangHi" class="lang-btn" data-lang="hi">हिन्दी ]</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky Header & 8-Calculator Navigation Bar Above the Fold -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand-row">
+        <a href="#top" class="brand-identity" id="brandHomeLink">
+          <div class="brand-logo">ND</div>
+          <div>
+            <div class="brand-title">NeiharDario</div>
+          </div>
+        </a>
+
+        <nav class="Quick-nav-links" aria-label="Section Navigation">
+          <a href="#calculators-workspace">8 Calculators</a>
+          <a href="#editorial-guide">Formulas &amp; Math</a>
+          <a href="#about">About Us</a>
+          <a href="#disclaimer">Non-Lender Disclaimer</a>
+          <a href="#faq">7 FAQs</a>
+        </nav>
+      </div>
+
+      <!-- 8 Interactive Calculators Tab Bar -->
+      <nav class="calc-tabs-nav" role="tablist" aria-label="Calculator Selection Tabs">
+        <button type="button" role="tab" aria-selected="true" class="calc-tab-btn active" data-tab="emi">
+          <span>🏠</span> 1. EMI Calculator
+        </button>
+        <button type="button" role="tab" aria-selected="false" class="calc-tab-btn" data-tab="sip">
+          <span>📈</span> 2. SIP Calculator
+        </button>
+        <button type="button" role="tab" aria-selected="false" class="calc-tab-btn" data-tab="gst">
+          <span>🧾</span> 3. GST Calculator
+        </button>
+        <button type="button" role="tab" aria-selected="false" class="calc-tab-btn" data-tab="tax">
+          <span>🏛️</span> 4. Income Tax (New vs Old)
+        </button>
+        <button type="button" role="tab" aria-selected="false" class="calc-tab-btn" data-tab="age">
+          <span>🎂</span> 5. Age Calculator
+        </button>
+        <button type="button" role="tab" aria-selected="false" class="calc-tab-btn" data-tab="pct">
+          <span>％</span> 6. Percentage (3-in-1)
+        </button>
+        <button type="button" role="tab" aria-selected="false" class="calc-tab-btn" data-tab="datediff">
+          <span>📅</span> 7. Date Difference
+        </button>
+        <button type="button" role="tab" aria-selected="false" class="calc-tab-btn" data-tab="bmi">
+          <span>⚕️</span> 8. BMI (Indian Cut-Offs)
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main 70/30 Portal Container -->
+  <main id="top" class="portal-container">
+    <div class="layout-grid-70-30">
+
+      <!-- ====================================================================
+           LEFT 70% COLUMN: ACTIVE CALCULATOR + EDITORIAL GUIDE + ABOUT + DISCLAIMER + 7 FAQS
+           ==================================================================== -->
+      <div id="calculators-workspace">
+
+        <!-- ==================================================================
+             CALCULATOR 1: EMI CALCULATOR (HOME, CAR & PERSONAL LOAN)
+             ================================================================== -->
+        <section id="panel-emi" class="card-box calc-panel active" aria-labelledby="title-emi">
+          <div class="calc-header">
+            <div>
+              <span class="calc-badge">Calculator 1 • Home, Car &amp; Personal Loan</span>
+              <h1 id="title-emi" class="calc-title">EMI Calculator &amp; Amortization Schedule</h1>
+              <p class="calc-desc">Calculate your monthly loan installment (EMI), total interest cost, and month-by-month or year-by-year repayment schedule.</p>
+            </div>
+          </div>
+
+          <div class="calc-workspace-grid">
+            <!-- Semantic Form -->
+            <form id="form-emi" novalidate>
+              <div class="form-group">
+                <div class="form-label-row">
+                  <label for="emiPrincipal">Loan Amount (₹)</label>
+                  <input type="number" id="emiPrincipal" class="input-number-inline" value="5000000" min="10000" max="500000000" step="10000" required />
+                </div>
+                <div id="emiPrincipalWords" class="words-helper">₹50.00 Lakh</div>
+                <input type="range" id="emiPrincipalSlider" min="50000" max="30000000" step="50000" value="5000000" aria-label="Loan Amount Slider" />
+                <div class="chip-row">
+                  <button type="button" class="quick-chip emi-chip" data-amount="500000">₹5L</button>
+                  <button type="button" class="quick-chip emi-chip" data-amount="2500000">₹25L</button>
+                  <button type="button" class="quick-chip emi-chip active" data-amount="5000000">₹50L</button>
+                  <button type="button" class="quick-chip emi-chip" data-amount="10000000">₹1Cr</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="form-label-row">
+                  <label for="emiRate">Annual Interest Rate (% p.a.)</label>
+                  <input type="number" id="emiRate" class="input-number-inline" value="8.5" min="1" max="36" step="0.05" required />
+                </div>
+                <input type="range" id="emiRateSlider" min="5" max="24" step="0.05" value="8.5" aria-label="Annual Interest Rate Slider" />
+              </div>
+
+              <div class="form-group">
+                <div class="form-label-row">
+                  <label for="emiTenure">Loan Tenure</label>
+                  <input type="number" id="emiTenure" class="input-number-inline" value="20" min="1" max="360" step="1" required />
+                </div>
+                <div class="segmented-group" style="margin-bottom:8px;">
+                  <button type="button" id="emiUnitYearsBtn" class="seg-btn active">Tenure in Years</button>
+                  <button type="button" id="emiUnitMonthsBtn" class="seg-btn">Tenure in Months</button>
+                </div>
+                <input type="range" id="emiTenureSlider" min="1" max="30" step="1" value="20" aria-label="Loan Tenure Slider" />
+              </div>
+
+              <div class="btn-row">
+                <button type="submit" class="btn-primary">Calculate EMI</button>
+                <button type="button" id="emiPrintBtn" class="btn-secondary">🖨️ Print / Save PDF</button>
+              </div>
+            </form>
+
+            <!-- Accessible Output Region -->
+            <div class="output-region" aria-live="polite">
+              <div class="kpi-hero">
+                <div class="kpi-hero-label">Monthly Loan EMI</div>
+                <div id="emiOutMonthly" class="kpi-hero-value">₹43,391</div>
+                <div id="emiOutSummarySub" class="kpi-hero-sub">For 240 monthly installments at 8.5% p.a.</div>
+              </div>
+
+              <div class="kpi-sub-grid">
+                <div class="kpi-mini-card">
+                  <div class="kpi-mini-label">Principal Amount</div>
+                  <div id="emiOutPrincipal" class="kpi-mini-val">₹50,00,000</div>
+                </div>
+                <div class="kpi-mini-card">
+                  <div class="kpi-mini-label">Total Interest Payable</div>
+                  <div id="emiOutInterest" class="kpi-mini-val" style="color:var(--brand-amber);">₹54,13,879</div>
+                </div>
+                <div class="kpi-mini-card">
+                  <div class="kpi-mini-label">Total Payment (P + I)</div>
+                  <div id="emiOutTotal" class="kpi-mini-val" style="color:var(--brand-blue-dark);">₹1,04,13,879</div>
+                </div>
+              </div>
+
+              <!-- Interactive SVG Donut Chart -->
+              <div class="svg-chart-wrap">
+                <svg class="donut-svg" viewBox="0 0 42 42" role="img" aria-label="Principal vs Interest Split Donut Chart">
+                  <circle cx="21" cy="21" r="15.91549431" fill="transparent" stroke="#d97706" stroke-width="6"></circle>
+                  <circle id="emiDonutPrincipalCircle" cx="21" cy="21" r="15.91549431" fill="transparent" stroke="#1d4ed8" stroke-width="6" stroke-dasharray="48 52" stroke-dashoffset="0"></circle>
+                </svg>
+                <div class="chart-legend">
+                  <div class="legend-item">
+                    <span class="legend-swatch" style="background:#1d4ed8;"></span>
+                    <span id="emiLegendPrincipal">Principal: 48.0%</span>
+                  </div>
+                  <div class="legend-item">
+                    <span class="legend-swatch" style="background:#d97706;"></span>
+                    <span id="emiLegendInterest">Interest: 52.0%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Scrollable Amortization Schedule -->
+          <div style="margin-top:24px;">
+            <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px;">
+              <h2 style="font-size:1.15rem; font-weight:900; margin:0;">Dynamic Amortization Payment Schedule</h2>
+              <div class="chip-row" style="margin:0;">
+                <button type="button" id="emiSchedYearlyBtn" class="quick-chip active">Yearly View</button>
+                <button type="button" id="emiSchedMonthlyBtn" class="quick-chip">Monthly View</button>
+              </div>
+            </div>
+            <div class="table-scroll-box">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th id="emiSchedPeriodHeader">Year</th>
+                    <th class="num">Opening Balance</th>
+                    <th class="num">EMI Paid</th>
+                    <th class="num">Principal Paid</th>
+                    <th class="num">Interest Paid</th>
+                    <th class="num">Closing Balance</th>
+                  </tr>
+                </thead>
+                <tbody id="emiScheduleBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             CALCULATOR 2: SIP CALCULATOR (MUTUAL FUND FUTURE VALUE)
+             ================================================================== -->
+        <section id="panel-sip" class="card-box calc-panel" aria-labelledby="title-sip">
+          <div class="calc-header">
+            <div>
+              <span class="calc-badge">Calculator 2 • Mutual Fund Compounding</span>
+              <h2 id="title-sip" class="calc-title">SIP Calculator (Mutual Fund Future Value)</h2>
+              <p class="calc-desc">Formula: FV = P × [((1 + i)^n − 1) / i] × (1 + i). Estimate your total wealth corpus from systematic monthly investing.</p>
+            </div>
+          </div>
+
+          <div class="calc-workspace-grid">
+            <form id="form-sip" novalidate>
+              <div class="form-group">
+                <div class="form-label-row">
+                  <label for="sipMonthly">Monthly Investment Amount (₹)</label>
+                  <input type="number" id="sipMonthly" class="input-number-inline" value="15000" min="500" max="10000000" step="500" required />
+                </div>
+                <div id="sipMonthlyWords" class="words-helper">₹15,000 / month</div>
+                <input type="range" id="sipMonthlySlider" min="500" max="200000" step="500" value="15000" aria-label="Monthly SIP Amount Slider" />
+                <div class="chip-row">
+                  <button type="button" class="quick-chip sip-chip" data-sip="5000">₹5,000</button>
+                  <button type="button" class="quick-chip sip-chip active" data-sip="15000">₹15,000</button>
+                  <button type="button" class="quick-chip sip-chip" data-sip="25000">₹25,000</button>
+                  <button type="button" class="quick-chip sip-chip" data-sip="50000">₹50,000</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="form-label-row">
+                  <label for="sipRate">Expected Annual Return Rate (% p.a.)</label>
+                  <input type="number" id="sipRate" class="input-number-inline" value="12" min="1" max="35" step="0.5" required />
+                </div>
+                <input type="range" id="sipRateSlider" min="4" max="25" step="0.5" value="12" aria-label="Expected Return Rate Slider" />
+              </div>
+
+              <div class="form-group">
+                <div class="form-label-row">
+                  <label for="sipYears">Investment Duration (Years)</label>
+                  <input type="number" id="sipYears" class="input-number-inline" value="15" min="1" max="45" step="1" required />
+                </div>
+                <input type="range" id="sipYearsSlider" min="1" max="40" step="1" value="15" aria-label="Investment Duration Slider" />
+              </div>
+
+              <div class="btn-row">
+                <button type="submit" class="btn-primary">Calculate SIP Maturity</button>
+              </div>
+            </form>
+
+            <div class="output-region" aria-live="polite">
+              <div class="kpi-hero">
+                <div class="kpi-hero-label">Total Future Value (Maturity Corpus)</div>
+                <div id="sipOutFutureValue" class="kpi-hero-value">₹75,68,640</div>
+                <div id="sipOutSubText" class="kpi-hero-sub">After 15 years (180 monthly SIP installments)</div>
+              </div>
+
+              <div class="kpi-sub-grid">
+                <div class="kpi-mini-card">
+                  <div class="kpi-mini-label">Total Invested Amount</div>
+                  <div id="sipOutInvested" class="kpi-mini-val">₹27,00,000</div>
+                </div>
+                <div class="kpi-mini-card">
+                  <div class="kpi-mini-label">Est. Wealth Gained</div>
+                  <div id="sipOutReturns" class="kpi-mini-val" style="color:var(--brand-emerald);">₹48,68,640</div>
+                </div>
+              </div>
+
+              <!-- SVG Donut Breakdown for SIP -->
+              <div class="svg-chart-wrap">
+                <svg class="donut-svg" viewBox="0 0 42 42" role="img" aria-label="Invested vs Returns Split Donut Chart">
+                  <circle cx="21" cy="21" r="15.91549431" fill="transparent" stroke="#047857" stroke-width="6"></circle>
+                  <circle id="sipDonutInvestedCircle" cx="21" cy="21" r="15.91549431" fill="transparent" stroke="#1d4ed8" stroke-width="6" stroke-dasharray="36 64" stroke-dashoffset="0"></circle>
+                </svg>
+                <div class="chart-legend">
+                  <div class="legend-item">
+                    <span class="legend-swatch" style="background:#1d4ed8;"></span>
+                    <span id="sipLegendInvested">Invested: 35.7%</span>
+                  </div>
+                  <div class="legend-item">
+                    <span class="legend-swatch" style="background:#047857;"></span>
+                    <span id="sipLegendReturns">Wealth Gained: 64.3%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             CALCULATOR 3: GST CALCULATOR (ADD OR REMOVE GST + CUSTOM RATE)
+             ================================================================== -->
+        <section id="panel-gst" class="card-box calc-panel" aria-labelledby="title-gst">
+          <div class="calc-header">
+            <div>
+              <span class="calc-badge">Calculator 3 • Forward &amp; Reverse GST</span>
+              <h2 id="title-gst" class="calc-title">GST Calculator (Add or Remove GST + Custom Rate)</h2>
+              <p class="calc-desc">Add GST to a base amount or remove GST from an inclusive invoice, with custom rate input and CGST/SGST vs. IGST split.</p>
+            </div>
+          </div>
+
+          <div class="calc-workspace-grid">
+            <form id="form-gst" novalidate>
+              <div class="form-group">
+                <label style="display:block; margin-bottom:6px;">GST Calculation Mode</label>
+                <div class="segmented-group">
+                  <button type="button" id="gstModeExclusiveBtn" class="seg-btn active">+ Add GST (GST Exclusive)</button>
+                  <button type="button" id="gstModeInclusiveBtn" class="seg-btn">− Remove GST (GST Inclusive)</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="form-label-row">
+                  <label for="gstAmount" id="gstAmountLabel">Original Pre-Tax Amount (₹)</label>
+                  <input type="number" id="gstAmount" class="input-number-inline" value="25000" min="1" max="1000000000" step="any" required />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="form-label-row">
+                  <label for="gstRate">GST Rate (%) — Select Preset or Type Custom Rate</label>
+                  <input type="number" id="gstRate" class="input-number-inline" value="18" min="0" max="100" step="any" required />
+                </div>
+                <div class="chip-row">
+                  <button type="button" class="quick-chip gst-slab-chip" data-rate="5">5%</button>
+                  <button type="button" class="quick-chip gst-slab-chip" data-rate="12">12%</button>
+                  <button type="button" class="quick-chip gst-slab-chip active" data-rate="18">18%</button>
+                  <button type="button" class="quick-chip gst-slab-chip" data-rate="28">28%</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label style="display:block; margin-bottom:6px;">Supply Type (Tax Split)</label>
+                <div class="segmented-group">
+                  <button type="button" id="gstSupplyIntraBtn" class="seg-btn active">Intra-State (CGST + SGST)</button>
+                  <button type="button" id="gstSupplyInterBtn" class="seg-btn">Inter-State (IGST 100%)</button>
+                </div>
+              </div>
+
+              <div class="btn-row">
+                <button type="submit" class="btn-primary">Calculate GST Breakdown</button>
+              </div>
+            </form>
+
+            <div class="output-region" aria-live="polite">
+              <div class="kpi-hero">
+                <div class="kpi-hero-label">Final Post-Tax Invoice Value</div>
+                <div id="gstOutPostTax" class="kpi-hero-value">₹29,500.00</div>
+                <div id="gstOutModeSub" class="kpi-hero-sub">Net Pre-Tax: ₹25,000.00 + Total GST: ₹4,500.00</div>
+              </div>
+
+              <div class="kpi-sub-grid">
+                <div class="kpi-mini-card">
+                  <div class="kpi-mini-label">Net Pre-Tax Amount</div>
+                  <div id="gstOutNet" class="kpi-mini-val">₹25,000.00</div>
+                </div>
+                <div class="kpi-mini-card">
+                  <div id="gstOutSplit1Label" class="kpi-mini-label">CGST (9%)</div>
+                  <div id="gstOutSplit1Val" class="kpi-mini-val">₹2,250.00</div>
+                </div>
+                <div class="kpi-mini-card">
+                  <div id="gstOutSplit2Label" class="kpi-mini-label">SGST (9%)</div>
+                  <div id="gstOutSplit2Val" class="kpi-mini-val">₹2,250.00</div>
+                </div>
+                <div class="kpi-mini-card">
+                  <div class="kpi-mini-label">Total GST Charged</div>
+                  <div id="gstOutTotalTax" class="kpi-mini-val" style="color:var(--brand-amber);">₹4,500.00</div>
+                </div>
+              </div>
+
+              <!-- Mandatory Official GST Portal Reference Link -->
+              <div class="official-callout">
+                🏛️ <strong>Verify Official GST Rates:</strong> Since GST slabs and HSN/SAC classifications are periodically updated by the GST Council, always verify the latest applicable tax rate on the official Indian Goods and Services Tax Portal:
+                <a href="https://www.gst.gov.in" target="_blank" rel="noopener noreferrer">https://www.gst.gov.in ↗</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             CALCULATOR 4: INDIAN INCOME TAX CALCULATOR (NEW VS. OLD REGIME)
+             ================================================================== -->
+        <section id="panel-tax" class="card-box calc-panel" aria-labelledby="title-tax">
+          <div class="calc-header">
+            <div>
+              <span class="calc-badge">Calculator 4 • CBDT New vs. Old Regime</span>
+              <h2 id="title-tax" class="calc-title">Indian Income Tax Calculator (New vs. Old Regime)</h2>
+              <p class="calc-desc">Side-by-side comparison incorporating the ₹75,000 Standard Deduction and Section 87A rebate under the New Tax Regime vs. Old Regime deductions.</p>
+            </div>
+          </div>
+
+          <div class="calc-workspace-grid">
+            <form id="form-tax" novalidate>
+              <div class="form-group">
+                <label for="taxAySelect">Assessment Year / Financial Year</label>
+                <select id="taxAySelect" class="input-select" style="margin-top:4px;">
+                  <option value="2026-27">AY 2026-27 (FY 2025-26 Latest Slabs)</option>
+                  <option value="2025-26">AY 2025-26 (FY 2024-25 Slabs)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <div class="form-label-row">
+                  <label for="taxGrossIncome">Gross Annual Salary / Income (₹)</label>
+                  <input type="number" id="taxGrossIncome" class="input-number-inline" value="1400000" min="0" max="500000000" step="10000" required />
+                </div>
+                <div id="taxGrossWords" class="words-helper">₹14.00 Lakh</div>
+              </div>
+
+              <div class="form-group">
+                <label for="taxAgeBracket">Citizen Age Bracket (For Old Regime Exemption)</label>
+                <select id="taxAgeBracket" class="input-select" style="margin-top:4px;">
+                  <option value="below60">Below 60 Years (General Citizen)</option>
+                  <option value="60to80">60 to 80 Years (Senior Citizen)</option>
+                  <option value="above80">80+ Years (Super Senior Citizen)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <div class="form-label-row">
+                  <label for="taxDed80C">Old Regime Sec 80C (EPF, PPF, ELSS, LIC) (₹)</label>
+                  <input type="number" id="taxDed80C" class="input-number-inline" value="150000" min="0" max="150000" step="5000" required />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="form-label-row">
+                  <label for="taxDed80D">Old Regime Sec 80D (Health Insurance) (₹)</label>
+                  <input type="number" id="taxDed80D" class="input-number-inline" value="25000" min="0" max="100000" step="2500" required />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="form-label-row">
+                  <label for="taxDedHra">Old Regime HRA / Sec 24(b) Home Loan Interest (₹)</label>
+                  <input type="number" id="taxDedHra" class="input-number-inline" value="100000" min="0" max="5000000" step="10000" required />
+                </div>
+              </div>
+
+              <div class="btn-row">
+                <button type="submit" class="btn-primary">Compare Tax Regimes</button>
+              </div>
+            </form>
+
+            <div class="output-region" aria-live="polite">
+              <div class="kpi-hero">
+                <div class="kpi-hero-label">Recommended Tax Regime Winner</div>
+                <div id="taxOutWinnerBadge" class="kpi-hero-value">New Regime Saves ₹1,19,600</div>
+                <div id="taxOutWinnerSub" class="kpi-hero-sub">Includes ₹75,000 Standard Deduction in New Regime &amp; ₹50,000 in Old Regime</div>
+              </div>
+
+              <div class="table-scroll-box" style="margin-top:8px;">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Tax Metric</th>
+                      <th class="num">New Tax Regime</th>
+                      <th class="num">Old Tax Regime</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Gross Annual Income</td>
+                      <td id="taxRowGrossNew" class="num">₹14,00,000</td>
+                      <td id="taxRowGrossOld" class="num">₹14,00,000</td>
+                    </tr>
+                    <tr>
+                      <td>Standard + Ch VI-A Deductions</td>
+                      <td id="taxRowDedNew" class="num">₹75,000</td>
+                      <td id="taxRowDedOld" class="num">₹3,25,000</td>
+                    </tr>
+                    <tr>
+                      <td>Net Taxable Income</td>
+                      <td id="taxRowTaxableNew" class="num">₹13,25,000</td>
+                      <td id="taxRowTaxableOld" class="num">₹10,75,000</td>
+                    </tr>
+                    <tr>
+                      <td>Base Tax (After Sec 87A Rebate)</td>
+                      <td id="taxRowBaseNew" class="num">₹78,750</td>
+                      <td id="taxRowBaseOld" class="num">₹1,35,000</td>
+                    </tr>
+                    <tr>
+                      <td>4% Health &amp; Education Cess</td>
+                      <td id="taxRowCessNew" class="num">₹3,150</td>
+                      <td id="taxRowCessOld" class="num">₹5,400</td>
+                    </tr>
+                    <tr class="highlight-row">
+                      <td>Total Tax Payable</td>
+                      <td id="taxRowTotalNew" class="num" style="color:var(--brand-emerald);">₹81,900</td>
+                      <td id="taxRowTotalOld" class="num" style="color:var(--brand-rose);">₹1,40,400</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             CALCULATOR 5: AGE CALCULATOR (EXACT AGE + NEXT BIRTHDAY COUNTDOWN)
+             ================================================================== -->
+        <section id="panel-age" class="card-box calc-panel" aria-labelledby="title-age">
+          <div class="calc-header">
+            <div>
+              <span class="calc-badge">Calculator 5 • Chronological Age &amp; Exam Eligibility</span>
+              <h2 id="title-age" class="calc-title">Exact Age Calculator &amp; Next Birthday Countdown</h2>
+              <p class="calc-desc">Compute your exact age in years, months, and days, total hours lived, and exact months and days until your next birthday.</p>
+            </div>
+          </div>
+
+          <div class="calc-workspace-grid">
+            <form id="form-age" novalidate>
+              <div class="form-group">
+                <label for="ageDob">Date of Birth</label>
+                <input type="date" id="ageDob" class="input-date" value="1996-08-15" required style="margin-top:6px;" />
+              </div>
+
+              <div class="form-group">
+                <label for="ageAsOf">Calculate Age As Of Date</label>
+                <input type="date" id="ageAsOf" class="input-date" value="2026-10-25" required style="margin-top:6px;" />
+              </div>
+
+              <div class="btn-row">
+                <button type="submit" class="btn-primary">Calculate Exact Age</button>
+              </div>
+            </form>
+
+            <div class="output-region" aria-live="polite">
+              <div class="kpi-hero">
+                <div class="kpi-hero-label">Exact Chronological Age</div>
+                <div id="ageOutExactYMD" class="kpi-hero-value">30 Years, 2 Months, 10 Days</div>
+                <div id="ageOutBornDay" class="kpi-hero-sub">Born on Thursday, 15 August 1996</div>
+              </div>
+
+              <div class="kpi-sub-grid">
+                <div class="kpi-mini-card">
+                  <div class="kpi-mini-label">Total Months Lived</div>
+                  <div id="ageOutTotalMonths" class="kpi-mini-val">362 Months</div>
+                </div>
+                <div class="kpi-mini-card">
+                  <div class="kpi-mini-label">Total Weeks Lived</div>
+                  <div id="ageOutTotalWeeks" class="kpi-mini-val">1,575 Weeks</div>
+                </div>
+                <div class="kpi-mini-card">
+                  <div class="kpi-mini-label">Total Days Lived</div>
+                  <div id="ageOutTotalDays" class="kpi-mini-val">11,028 Days</div>
+                </div>
+                <div class="kpi-mini-card">
+                  <div class="kpi-mini-label">Total Hours Lived</div>
+                  <div id="ageOutTotalHours" class="kpi-mini-val">2,64,672 Hours</div>
+                </div>
+              </div>
+
+              <div class="official-callout" style="background-color:var(--bg-emerald-tint); border-color:var(--brand-emerald); color:#064e3b;">
+                🎂 <strong>Next Birthday Countdown:</strong>
+                <span id="ageOutNextBday">9 Months and 21 Days remaining until your next birthday (Sunday, 15 August 2027).</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             CALCULATOR 6: PERCENTAGE CALCULATOR (3-IN-1 UTILITY)
+             ================================================================== -->
+        <section id="panel-pct" class="card-box calc-panel" aria-labelledby="title-pct">
+          <div class="calc-header">
+            <div>
+              <span class="calc-badge">Calculator 6 • 3-in-1 Everyday Percentage Suite</span>
+              <h2 id="title-pct" class="calc-title">Percentage Calculator (3-in-1 Utility)</h2>
+              <p class="calc-desc">Solve all three percentage questions simultaneously: X% of Y, X is what % of Y, and Percentage Increase/Decrease from A to B.</p>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr; gap:20px;">
+            <!-- Sub-Form 1: What is X% of Y? -->
+            <form id="form-pct-1" class="output-region" novalidate>
+              <h3 style="margin:0 0 12px 0; font-size:1.05rem; font-weight:900; color:var(--brand-blue-dark);">1. What is X% of Y?</h3>
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:12px; align-items:end;">
+                <div>
+                  <label for="pct1X">Percentage (X%)</label>
+                  <input type="number" id="pct1X" class="input-number" value="18" step="any" required />
+                </div>
+                <div>
+                  <label for="pct1Y">Of Value (Y)</label>
+                  <input type="number" id="pct1Y" class="input-number" value="4500" step="any" required />
+                </div>
+                <div class="btn-row" style="margin:0;">
+                  <button type="submit" class="btn-primary">Calculate</button>
+                </div>
+              </div>
+              <div aria-live="polite" style="margin-top:12px; padding:10px 14px; background:#ffffff; border:2px solid var(--border-card); border-radius:8px; font-weight:900;">
+                Result: <span id="pct1Out" style="color:var(--brand-blue-dark); font-size:1.2rem;">810</span>
+              </div>
+            </form>
+
+            <!-- Sub-Form 2: X is what percentage of Y? -->
+            <form id="form-pct-2" class="output-region" novalidate>
+              <h3 style="margin:0 0 12px 0; font-size:1.05rem; font-weight:900; color:var(--brand-blue-dark);">2. X is what percentage of Y? (Exam Marks / Share)</h3>
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:12px; align-items:end;">
+                <div>
+                  <label for="pct2X">Part Value (X)</label>
+                  <input type="number" id="pct2X" class="input-number" value="420" step="any" required />
+                </div>
+                <div>
+                  <label for="pct2Y">Total Value (Y)</label>
+                  <input type="number" id="pct2Y" class="input-number" value="500" step="any" required />
+                </div>
+                <div class="btn-row" style="margin:0;">
+                  <button type="submit" class="btn-primary">Calculate</button>
+                </div>
+              </div>
+              <div aria-live="polite" style="margin-top:12px; padding:10px 14px; background:#ffffff; border:2px solid var(--border-card); border-radius:8px; font-weight:900;">
+                Result: <span id="pct2Out" style="color:var(--brand-emerald); font-size:1.2rem;">84.00%</span>
+              </div>
+            </form>
+
+            <!-- Sub-Form 3: Percentage Increase / Decrease from A to B -->
+            <form id="form-pct-3" class="output-region" novalidate>
+              <h3 style="margin:0 0 12px 0; font-size:1.05rem; font-weight:900; color:var(--brand-blue-dark);">3. Percentage Increase / Decrease from Initial Value (A) to Final Value (B)</h3>
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:12px; align-items:end;">
+                <div>
+                  <label for="pct3A">Initial Value (A)</label>
+                  <input type="number" id="pct3A" class="input-number" value="50000" step="any" required />
+                </div>
+                <div>
+                  <label for="pct3B">Final Value (B)</label>
+                  <input type="number" id="pct3B" class="input-number" value="62500" step="any" required />
+                </div>
+                <div class="btn-row" style="margin:0;">
+                  <button type="submit" class="btn-primary">Calculate</button>
+                </div>
+              </div>
+              <div aria-live="polite" style="margin-top:12px; padding:10px 14px; background:#ffffff; border:2px solid var(--border-card); border-radius:8px; font-weight:900;">
+                Result: <span id="pct3Out" style="color:var(--brand-amber); font-size:1.2rem;">+25.00% Increase (Absolute Difference: +12,500)</span>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             CALCULATOR 7: DATE DIFFERENCE CALCULATOR
+             ================================================================== -->
+        <section id="panel-datediff" class="card-box calc-panel" aria-labelledby="title-datediff">
+          <div class="calc-header">
+            <div>
+              <span class="calc-badge">Calculator 7 • Duration &amp; Working Days</span>
+              <h2 id="title-datediff" class="calc-title">Date Difference Calculator</h2>
+              <p class="calc-desc">Find exact years, months, and days between two dates, plus total calendar days, weeks, and working weekdays.</p>
+            </div>
+          </div>
+
+          <div class="calc-workspace-grid">
+            <form id="form-datediff" novalidate>
+              <div class="form-group">
+                <label for="ddStartDate">Start Date</label>
+                <input type="date" id="ddStartDate" class="input-date" value="2026-04-01" required style="margin-top:6px;" />
+              </div>
+
+              <div class="form-group">
+                <label for="ddEndDate">End Date</label>
+                <input type="date" id="ddEndDate" class="input-date" value="2026-10-25" required style="margin-top:6px;" />
+              </div>
+
+              <div class="form-group" style="display:flex; align-items:center; gap:10px; padding:10px; background:var(--bg-subtle); border:1.5px solid var(--border-card); border-radius:8px;">
+                <input type="checkbox" id="ddIncludeEnd" checked style="width:20px; height:20px;" />
+                <label for="ddIncludeEnd" style="cursor:pointer;">Include End Date in calculation (+1 day)</label>
+              </div>
+
+              <div class="btn-row">
+                <button type="submit" class="btn-primary">Calculate Date Difference</button>
+              </div>
+            </form>
+
+            <div class="output-region" aria-live="polite">
+              <div class="kpi-hero">
+                <div class="kpi-hero-label">Exact Calendar Duration</div>
+                <div id="ddOutYMD" class="kpi-hero-value">0 Years, 6 Months, 25 Days</div>
+                <div id="ddOutSub" class="kpi-hero-sub">Inclusive of end date (+1 day applied)</div>
+              </div>
+
+              <div class="kpi-sub-grid">
+                <div class="kpi-mini-card">
+                  <div class="kpi-mini-label">Total Calendar Days</div>
+                  <div id="ddOutTotalDays" class="kpi-mini-val">208 Days</div>
+                </div>
+                <div class="kpi-mini-card">
+                  <div class="kpi-mini-label">Weeks + Extra Days</div>
+                  <div id="ddOutWeeks" class="kpi-mini-val">29 Weeks, 5 Days</div>
+                </div>
+                <div class="kpi-mini-card">
+                  <div class="kpi-mini-label">Working Weekdays (Mon–Fri)</div>
+                  <div id="ddOutWeekdays" class="kpi-mini-val" style="color:var(--brand-emerald);">148 Days</div>
+                </div>
+                <div class="kpi-mini-card">
+                  <div class="kpi-mini-label">Weekend Days (Sat–Sun)</div>
+                  <div id="ddOutWeekends" class="kpi-mini-val" style="color:var(--brand-amber);">60 Days</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             CALCULATOR 8: BMI CALCULATOR (INDIAN / ASIAN-INDIAN CUT-OFFS)
+             ================================================================== -->
+        <section id="panel-bmi" class="card-box calc-panel" aria-labelledby="title-bmi">
+          <div class="calc-header">
+            <div>
+              <span class="calc-badge">Calculator 8 • Indian Ministry of Health / ICMR Cut-Offs</span>
+              <h2 id="title-bmi" class="calc-title">BMI Calculator (Indian Asian-Indian vs. WHO Cut-Offs)</h2>
+              <p class="calc-desc">Calculate your Body Mass Index with toggleable cm or Feet+Inches height and compare against stricter Indian metabolic guidelines.</p>
+            </div>
+          </div>
+
+          <div class="calc-workspace-grid">
+            <form id="form-bmi" novalidate>
+              <div class="form-group">
+                <div class="form-label-row">
+                  <label for="bmiWeight">Weight (kg)</label>
+                  <input type="number" id="bmiWeight" class="input-number-inline" value="70" min="15" max="250" step="0.5" required />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label style="display:block; margin-bottom:6px;">Height Unit Mode</label>
+                <div class="segmented-group" style="margin-bottom:10px;">
+                  <button type="button" id="bmiUnitCmBtn" class="seg-btn active">Centimetres (cm)</button>
+                  <button type="button" id="bmiUnitFtBtn" class="seg-btn">Feet + Inches (ft / in)</button>
+                </div>
+
+                <!-- CM Input -->
+                <div id="bmiCmWrap" class="form-label-row">
+                  <label for="bmiHeightCm">Height (cm)</label>
+                  <input type="number" id="bmiHeightCm" class="input-number-inline" value="170" min="80" max="240" step="0.5" required />
+                </div>
+
+                <!-- Feet + Inches Inputs -->
+                <div id="bmiFtWrap" style="display:none; grid-template-columns:1fr 1fr; gap:10px;">
+                  <div>
+                    <label for="bmiHeightFeet">Feet (ft)</label>
+                    <input type="number" id="bmiHeightFeet" class="input-number" value="5" min="3" max="8" step="1" />
+                  </div>
+                  <div>
+                    <label for="bmiHeightInches">Inches (in)</label>
+                    <input type="number" id="bmiHeightInches" class="input-number" value="7" min="0" max="11.5" step="0.5" />
+                  </div>
+                </div>
+              </div>
+
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                <div class="form-group">
+                  <label for="bmiAge">Age (Years)</label>
+                  <input type="number" id="bmiAge" class="input-number" value="32" min="10" max="110" step="1" required />
+                </div>
+                <div class="form-group">
+                  <label for="bmiGender">Gender</label>
+                  <select id="bmiGender" class="input-select">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="btn-row">
+                <button type="submit" class="btn-primary">Calculate BMI Score</button>
+              </div>
+            </form>
+
+            <div class="output-region" aria-live="polite">
+              <div class="kpi-hero">
+                <div class="kpi-hero-label">Exact Body Mass Index (BMI)</div>
+                <div id="bmiOutScore" class="kpi-hero-value">24.2 kg/m²</div>
+                <div id="bmiOutHealthyRange" class="kpi-hero-sub">Healthy Indian Weight Range (BMI 18.0–22.9): 52.0 kg – 66.2 kg</div>
+              </div>
+
+              <div class="kpi-sub-grid">
+                <div class="kpi-mini-card">
+                  <div class="kpi-mini-label">Indian ICMR Status</div>
+                  <div id="bmiOutIndianStatus" class="kpi-mini-val" style="color:var(--brand-amber);">Overweight (At Risk)</div>
+                </div>
+                <div class="kpi-mini-card">
+                  <div class="kpi-mini-label">Standard WHO Status</div>
+                  <div id="bmiOutWhoStatus" class="kpi-mini-val" style="color:var(--brand-emerald);">Normal Weight</div>
+                </div>
+              </div>
+
+              <div class="official-callout">
+                🇮🇳 <strong>Mandatory Indian Health Guideline Note:</strong> The Indian Ministry of Health / Consensus Guidelines for Asian Indians classify BMI <strong>23.0–24.9 kg/m² as Overweight</strong> and <strong>≥ 25.0 kg/m² as Obese</strong> because Indians experience higher visceral body fat and cardiovascular/diabetes risk at lower body weights compared to Western populations.
+              </div>
+            </div>
+          </div>
+
+          <!-- Side-by-Side Indian vs WHO BMI Reference Table -->
+          <div class="table-scroll-box" style="margin-top:20px;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>BMI Classification Category</th>
+                  <th class="num">Indian / Asian-Indian Cut-Off</th>
+                  <th class="num">Standard WHO Cut-Off</th>
+                  <th class="num">Target Weight for Your Height</th>
+                </tr>
+              </thead>
+              <tbody id="bmiComparisonTableBody">
+                <tr>
+                  <td>Underweight</td>
+                  <td class="num">&lt; 18.0 kg/m²</td>
+                  <td class="num">&lt; 18.5 kg/m²</td>
+                  <td class="num" id="bmiWtUnder">&lt; 52.0 kg</td>
+                </tr>
+                <tr>
+                  <td>Normal / Healthy Weight</td>
+                  <td class="num" style="color:var(--brand-emerald); font-weight:900;">18.0 – 22.9 kg/m²</td>
+                  <td class="num">18.5 – 24.9 kg/m²</td>
+                  <td class="num" id="bmiWtNormal">52.0 – 66.2 kg</td>
+                </tr>
+                <tr>
+                  <td>Overweight (At Risk)</td>
+                  <td class="num" style="color:var(--brand-amber); font-weight:900;">23.0 – 24.9 kg/m²</td>
+                  <td class="num">25.0 – 29.9 kg/m²</td>
+                  <td class="num" id="bmiWtOver">66.5 – 72.0 kg</td>
+                </tr>
+                <tr>
+                  <td>Obese</td>
+                  <td class="num" style="color:var(--brand-rose); font-weight:900;">≥ 25.0 kg/m²</td>
+                  <td class="num">≥ 30.0 kg/m²</td>
+                  <td class="num" id="bmiWtObese">≥ 72.3 kg</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             INDEXABLE EDITORIAL GUIDE EXPLAINING FORMULAS & MATH
+             ================================================================== -->
+        <article id="editorial-guide" class="card-box">
+          <span class="calc-badge">Mathematical Reference &amp; Methodology</span>
+          <h2 style="font-size:1.4rem; font-weight:900; margin:4px 0 12px 0;">How Our Indian Financial, Tax &amp; Health Formulas Work</h2>
+          <p style="font-weight:600; color:var(--text-secondary);">
+            Every utility on <strong>NeiharDario</strong> uses transparent, standard mathematical equations audited against Reserve Bank of India (RBI) reducing-balance conventions, Central Board of Indirect Taxes and Customs (CBIC) GST rules, and Indian Council of Medical Research (ICMR) health guidelines:
+          </p>
+          <ul style="font-weight:600; color:var(--text-secondary); padding-left:20px; space-y-2;">
+            <li><strong>Reducing-Balance Loan EMI Formula:</strong> <code>EMI = [P × r × (1 + r)^n] / [(1 + r)^n − 1]</code>, where <code>P</code> is loan principal, <code>r</code> is monthly interest rate (<code>Annual Rate / 12 / 100</code>), and <code>n</code> is total monthly installments.</li>
+            <li><strong>Systematic Investment Plan (SIP) Annuity-Due Formula:</strong> <code>FV = P × [((1 + i)^n − 1) / i] × (1 + i)</code>, accounting for monthly compounding from day one of each installment.</li>
+            <li><strong>Forward &amp; Reverse GST Extraction:</strong> Adding GST multiplies base price by <code>(1 + Rate/100)</code>. Removing GST from an inclusive MRP divides the gross invoice by <code>(1 + Rate/100)</code> so you never over-subtract tax.</li>
+            <li><strong>Indian Asian-Indian BMI Consensus:</strong> Computes <code>Weight (kg) / [Height (m)]²</code> and evaluates risk at <code>18.0–22.9</code> (Normal), <code>23.0–24.9</code> (Overweight), and <code>≥25.0</code> (Obese).</li>
+          </ul>
+        </article>
+
+        <!-- ==================================================================
+             DEDICATED "ABOUT US" SECTION (#about)
+             ================================================================== -->
+        <section id="about" class="card-box" aria-labelledby="about-heading">
+          <span class="calc-badge">About Our Portal • 100% Privacy-First</span>
+          <h2 id="about-heading" style="font-size:1.4rem; font-weight:900; margin:4px 0 12px 0;">About Our Portal — NeiharDario</h2>
+          <p style="font-weight:600; color:var(--text-secondary);">
+            <strong>NeiharDario</strong> is a free, privacy-first Indian financial, mathematical, and health calculation utility built to help households, salaried professionals, small business owners, students, and senior citizens make informed everyday calculations with zero friction. Unlike cluttered financial marketplaces that hide results behind mobile OTP walls or telemarketing lead forms, NeiharDario is engineered for instant clarity, high-contrast WCAG accessibility, and complete mathematical transparency.
+          </p>
+          <p style="font-weight:600; color:var(--text-secondary);">
+            Every single tool on this website—from our Home, Car, and Personal Loan EMI Amortization engine and Mutual Fund SIP compounder to our Reverse GST invoice calculator, Income Tax New vs. Old Regime comparator, Exact Chronological Age finder, and Indian Consensus BMI evaluator—executes <strong>100% locally inside your web browser</strong> using Vanilla JavaScript. We do not operate a backend database that logs your salary, loan principal, tax deductions, birthdates, or health metrics. Because zero personal data is ever transmitted to or stored on external servers, you can plan your finances, verify GST invoices, and check exam age cut-offs in complete privacy on any mobile phone or desktop computer.
+          </p>
+        </section>
+
+        <!-- ==================================================================
+             PROMINENT "CALCULATOR-ONLY / NON-LENDER" DISCLAIMER BOX (#disclaimer)
+             ================================================================== -->
+        <section id="disclaimer" class="disclaimer-banner" aria-labelledby="disclaimer-heading">
+          <h2 id="disclaimer-heading" class="disclaimer-title">⚠️ Official Calculator-Only &amp; Non-Lender Legal Disclaimer</h2>
+          <p class="disclaimer-text">
+            IMPORTANT DISCLAIMER: This website is strictly an independent mathematical and informational calculator utility. We are NOT a bank, Non-Banking Financial Company (NBFC), Lending Service Provider (LSP), financial advisor, or medical institution. We DO NOT offer, sanction, broker, or facilitate loans, credit cards, or financial products of any kind, nor do we collect KYC or borrower lead data. All EMI, SIP, GST, Tax, and BMI outputs are illustrative estimates only. Users should verify tax rates on <a href="https://www.gst.gov.in" target="_blank" rel="noopener noreferrer" style="color:#881337; font-weight:900; text-decoration:underline;">gst.gov.in</a> and consult qualified professionals before making financial or health decisions.
+          </p>
+        </section>
+
+        <!-- ==================================================================
+             FAQ SECTION WITH EXACTLY 7 QUESTIONS & ANSWERS (#faq)
+             ================================================================== -->
+        <section id="faq" class="card-box" aria-labelledby="faq-heading">
+          <span class="calc-badge">Frequently Asked Questions • Schema Verified</span>
+          <h2 id="faq-heading" style="font-size:1.4rem; font-weight:900; margin:4px 0 16px 0;">Frequently Asked Questions (7 Essential Guides)</h2>
+
+          <details class="faq-item" open>
+            <summary>
+              <span>1. How is my monthly loan EMI and amortization schedule calculated?</span>
+              <span>▼</span>
+            </summary>
+            <div class="faq-answer">
+              Your Equated Monthly Installment (EMI) is calculated using the standard reducing-balance compound interest formula: <code>EMI = [P × r × (1 + r)^n] / [(1 + r)^n − 1]</code>, where <strong>P</strong> is the principal loan amount, <strong>r</strong> is the monthly interest rate (<code>Annual Rate ÷ 12 ÷ 100</code>), and <strong>n</strong> is the total number of monthly installments. In the amortization schedule, each month's interest is calculated on the remaining opening principal balance (<code>Opening Balance × r</code>), and the remaining portion of the EMI (<code>EMI − Monthly Interest</code>) goes toward reducing your principal balance.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              <span>2. How does compounding work in a Monthly SIP Calculator?</span>
+              <span>▼</span>
+            </summary>
+            <div class="faq-answer">
+              A Systematic Investment Plan (SIP) uses the annuity-due compound interest formula: <code>FV = P × [((1 + i)^n − 1) / i] × (1 + i)</code>, where <strong>P</strong> is your monthly investment, <strong>i</strong> is the periodic monthly return rate (<code>Annual Return Rate ÷ 12 ÷ 100</code>), and <strong>n</strong> is the total number of months (<code>Years × 12</code>). Each monthly contribution compounds independently for the remaining months of your tenure, allowing returns to generate further returns.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              <span>3. How do I add or remove GST from an invoice, and where can I verify official GST rates?</span>
+              <span>▼</span>
+            </summary>
+            <div class="faq-answer">
+              To add GST to a pre-tax base amount (GST Exclusive), multiply the base price by <code>(GST Rate ÷ 100)</code> and add it to the base price. To remove GST from a tax-inclusive MRP or invoice (Reverse GST), divide the gross amount by <code>[1 + (GST Rate ÷ 100)]</code> to find the exact pre-tax base price. For Intra-State transactions within the same state, total GST is split 50:50 into CGST and SGST; for Inter-State transactions across state borders, 100% is charged as IGST. You can verify current HSN and SAC tax rates directly on the official Indian GST Portal at <a href="https://www.gst.gov.in" target="_blank" rel="noopener noreferrer">https://www.gst.gov.in</a>.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              <span>4. Why does the BMI Calculator show different overweight and obesity cut-offs for Indians?</span>
+              <span>▼</span>
+            </summary>
+            <div class="faq-answer">
+              Clinical guidelines issued by the Indian Ministry of Health, the Indian Council of Medical Research (ICMR), and the Consensus Statement for Asian Indians establish stricter, lower BMI thresholds than the standard WHO table because South Asians exhibit higher visceral abdominal fat and higher insulin resistance at lower body weights. Specifically, Indian guidelines define Normal BMI as <strong>18.0 to 22.9 kg/m²</strong> (vs. 18.5 to 24.9 in WHO), Overweight as <strong>23.0 to 24.9 kg/m²</strong> (vs. 25.0 to 29.9 in WHO), and Obesity as <strong>≥ 25.0 kg/m²</strong> (vs. ≥ 30.0 in WHO).
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              <span>5. Is this website a loan provider or affiliated with any bank or the RBI?</span>
+              <span>▼</span>
+            </summary>
+            <div class="faq-answer">
+              No. NeiharDario is strictly an independent mathematical and informational calculator utility. We are <strong>NOT</strong> a bank, Non-Banking Financial Company (NBFC), Lending Service Provider (LSP), financial advisor, or affiliated with the Reserve Bank of India (RBI). We do not offer, sanction, broker, or disburse loans of any kind, and we never collect KYC documents, PAN numbers, or borrower leads.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              <span>6. How accurately do the Age and Date Difference calculators handle leap years and varying month lengths?</span>
+              <span>▼</span>
+            </summary>
+            <div class="faq-answer">
+              Both calculators use exact Gregorian calendar arithmetic rather than approximate 30-day month averages. They automatically account for 28-day, 29-day (leap years divisible by 4, excluding century years not divisible by 400), 30-day, and 31-day months when computing completed years, months, and days, as well as exact weekday vs. weekend counts.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              <span>7. Is the financial and personal data I type into these calculators stored or shared?</span>
+              <span>▼</span>
+            </summary>
+            <div class="faq-answer">
+              No. Every calculation on this portal executes 100% locally inside your web browser using client-side JavaScript. Your salary, loan figures, tax deductions, birthdates, and health measurements never leave your device, are never transmitted to any backend server, and are never shared with third parties.
+            </div>
+          </details>
+        </section>
+
+      </div>
+
+      <!-- ====================================================================
+           RIGHT 30% SIDEBAR: STICKY AD PLACEHOLDER + QUICK CALCULATOR DIRECTORY
+           (Enforces >=28px vertical margin buffer from all interactive controls)
+           ==================================================================== -->
+      <aside class="sidebar-sticky-wrap" aria-label="Sidebar Directory and Sponsored Slot">
+
+        <!-- Quick Calculator Directory Card -->
+        <div class="card-box" style="margin-bottom:0;">
+          <h2 style="font-size:1.05rem; font-weight:900; margin:0 0 12px 0; color:var(--brand-blue-dark);">Quick Calculator Directory</h2>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <button type="button" class="seg-btn dir-jump-btn" data-jump="emi" style="text-align:left;">🏠 1. Loan EMI &amp; Schedule</button>
+            <button type="button" class="seg-btn dir-jump-btn" data-jump="sip" style="text-align:left;">📈 2. Mutual Fund SIP</button>
+            <button type="button" class="seg-btn dir-jump-btn" data-jump="gst" style="text-align:left;">🧾 3. GST &amp; Reverse GST</button>
+            <button type="button" class="seg-btn dir-jump-btn" data-jump="tax" style="text-align:left;">🏛️ 4. Income Tax (New vs Old)</button>
+            <button type="button" class="seg-btn dir-jump-btn" data-jump="age" style="text-align:left;">🎂 5. Exact Age &amp; Birthday</button>
+            <button type="button" class="seg-btn dir-jump-btn" data-jump="pct" style="text-align:left;">％ 6. Percentage (3-in-1)</button>
+            <button type="button" class="seg-btn dir-jump-btn" data-jump="datediff" style="text-align:left;">📅 7. Date Difference</button>
+            <button type="button" class="seg-btn dir-jump-btn" data-jump="bmi" style="text-align:left;">⚕️ 8. BMI (Indian Cut-Offs)</button>
+          </div>
+        </div>
+
+        <!-- AdSense-Safe Sticky Container (min-height: 600px; max-width: 300px; >=28px buffer) -->
+        <div class="adsense-safe-zone">
+          <div class="ad-placeholder-box" role="complementary" aria-label="Advertisement Placeholder">
+            <span class="ad-placeholder-label">Advertisement • 300×600 Slot</span>
+            <p style="font-size:0.82rem; font-weight:700; margin:0;">
+              Reserved Zero-CLS Sticky Ad Container<br/>
+              (<code>min-height: 600px; max-width: 300px;</code>)<br/>
+              Protected by ≥28px click-safety buffer.
+            </p>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- Toast Notification -->
+  <div id="toastBox" class="toast-box" role="status" aria-live="polite"></div>
+
+  <!-- ========================================================================
+       GOOGLE TRANSLATE BRIDGE & COMPLETE 8-CALCULATOR VANILLA JS ENGINE
+       ======================================================================== -->
+  <script>
+    // 1. FORCE GOOGLE TRANSLATE (EN | हिन्दी) BRIDGE
+    function googleTranslateElementInit() {
+      if (window.google && window.google.translate) {
+        new window.google.translate.TranslateElement(
+          {
+            pageLanguage: 'en',
+            includedLanguages: 'en,hi',
+            autoDisplay: false
+          },
+          'google_translate_element'
+        );
+      }
+    }
+
+    function setLanguage(langCode) {
+      // 1. Set googtrans cookies for root path and domain
+      document.cookie = "googtrans=/en/" + langCode + "; path=/";
+      try {
+        document.cookie = "googtrans=/en/" + langCode + "; path=/; domain=" + location.hostname;
+      } catch (e) {}
+
+      // Update active toggle UI state
+      const btnEn = document.getElementById('btnLangEn');
+      const btnHi = document.getElementById('btnLangHi');
+      if (btnEn && btnHi) {
+        btnEn.classList.toggle('active', langCode === 'en');
+        btnHi.classList.toggle('active', langCode === 'hi');
+      }
+
+      // 2. Query .goog-te-combo, set value, and dispatch 'change' event
+      const combo = document.querySelector('.goog-te-combo');
+      if (combo) {
+        combo.value = langCode;
+        combo.dispatchEvent(new Event('change'));
+        showToast(langCode === 'hi' ? 'भाषा हिन्दी में बदल दी गई है (Google Translate)' : 'Language switched to English');
+      } else {
+        showToast(langCode === 'hi' ? 'हिन्दी अनुवाद सक्रिय किया गया (Cookie Set: /en/hi)' : 'English Language Active');
+      }
+    }
+
+    // Toast notification helper
+    let toastTimeout = null;
+    function showToast(message) {
+      const box = document.getElementById('toastBox');
+      if (!box) return;
+      box.textContent = message;
+      box.classList.add('show');
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        box.classList.remove('show');
+      }, 3200);
+    }
+
+    // 2. INDIAN NUMBER FORMATTING UTILITIES (Intl.NumberFormat('en-IN'))
+    const inrWholeFormatter = new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+      maximumFractionDigits: 0
+    });
+
+    const inrDecFormatter = new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+
+    const inNumFormatter = new Intl.NumberFormat('en-IN', {
+      maximumFractionDigits: 2
+    });
+
+    function formatINR(val) {
+      return inrWholeFormatter.format(Math.round(Number(val) || 0));
+    }
+
+    function formatINRDec(val) {
+      return inrDecFormatter.format(Number(val) || 0);
+    }
+
+    function formatLakhsCrores(val) {
+      const n = Math.abs(Number(val) || 0);
+      if (n >= 10000000) {
+        return '₹' + (val / 10000000).toFixed(2) + ' Crore (' + formatINR(val) + ')';
+      }
+      if (n >= 100000) {
+        return '₹' + (val / 100000).toFixed(2) + ' Lakh (' + formatINR(val) + ')';
+      }
+      return formatINR(val);
+    }
+
+    // 3. TAB NAVIGATION CONTROLLER
+    function switchCalculatorTab(tabKey) {
+      document.querySelectorAll('.calc-tab-btn').forEach(btn => {
+        const isMatch = btn.dataset.tab === tabKey;
+        btn.classList.toggle('active', isMatch);
+        btn.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+      });
+
+      document.querySelectorAll('.calc-panel').forEach(panel => {
+        panel.classList.toggle('active', panel.id === 'panel-' + tabKey);
+      });
+    }
+
+    // ========================================================================
+    // CALCULATOR 1: EMI CALCULATOR + AMORTIZATION SCHEDULE
+    // ========================================================================
+    const emiState = {
+      tenureUnit: 'years', // 'years' | 'months'
+      scheduleView: 'yearly' // 'yearly' | 'monthly'
+    };
+
+    function computeEMI() {
+      const P = Math.max(1000, parseFloat(document.getElementById('emiPrincipal').value) || 5000000);
+      const annualRate = Math.max(0.1, parseFloat(document.getElementById('emiRate').value) || 8.5);
+      const rawTenure = Math.max(1, parseInt(document.getElementById('emiTenure').value, 10) || 20);
+
+      document.getElementById('emiPrincipalWords').textContent = formatLakhsCrores(P);
+
+      const n = emiState.tenureUnit === 'years' ? rawTenure * 12 : rawTenure;
+      const r = annualRate / 12 / 100;
+
+      const factor = Math.pow(1 + r, n);
+      const emi = (P * r * factor) / (factor - 1);
+      const totalPayment = emi * n;
+      const totalInterest = Math.max(0, totalPayment - P);
+
+      document.getElementById('emiOutMonthly').textContent = formatINR(emi);
+      document.getElementById('emiOutSummarySub').textContent = `For ${n} monthly installments at ${annualRate}% p.a.`;
+      document.getElementById('emiOutPrincipal').textContent = formatINR(P);
+      document.getElementById('emiOutInterest').textContent = formatINR(totalInterest);
+      document.getElementById('emiOutTotal').textContent = formatINR(totalPayment);
+
+      // Update SVG Donut Chart
+      const principalPct = totalPayment > 0 ? (P / totalPayment) * 100 : 50;
+      const interestPct = Math.max(0, 100 - principalPct);
+      const circle = document.getElementById('emiDonutPrincipalCircle');
+      if (circle) {
+        circle.setAttribute('stroke-dasharray', `${principalPct.toFixed(2)} ${(100 - principalPct).toFixed(2)}`);
+      }
+      document.getElementById('emiLegendPrincipal').textContent = `Principal: ${principalPct.toFixed(1)}%`;
+      document.getElementById('emiLegendInterest').textContent = `Interest: ${interestPct.toFixed(1)}%`;
+
+      // Build Amortization Schedule
+      let balance = P;
+      const monthlyRows = [];
+      const yearlyRows = [];
+
+      let yrOpening = P;
+      let yrEmi = 0;
+      let yrPrincipal = 0;
+      let yrInterest = 0;
+
+      for (let m = 1; m <= n; m++) {
+        const openBal = balance;
+        const intPaid = openBal * r;
+        let prinPaid = emi - intPaid;
+        if (m === n || prinPaid > openBal) {
+          prinPaid = openBal;
+        }
+        const closeBal = Math.max(0, openBal - prinPaid);
+        const actualEmi = prinPaid + intPaid;
+
+        monthlyRows.push({
+          label: `Month ${m}`,
+          opening: openBal,
+          emi: actualEmi,
+          principal: prinPaid,
+          interest: intPaid,
+          closing: closeBal
+        });
+
+        yrEmi += actualEmi;
+        yrPrincipal += prinPaid;
+        yrInterest += intPaid;
+        balance = closeBal;
+
+        if (m % 12 === 0 || m === n) {
+          const yrNum = Math.ceil(m / 12);
+          yearlyRows.push({
+            label: `Year ${yrNum}`,
+            opening: yrOpening,
+            emi: yrEmi,
+            principal: yrPrincipal,
+            interest: yrInterest,
+            closing: closeBal
+          });
+          yrOpening = closeBal;
+          yrEmi = 0;
+          yrPrincipal = 0;
+          yrInterest = 0;
+        }
+      }
+
+      const rowsToShow = emiState.scheduleView === 'yearly' ? yearlyRows : monthlyRows;
+      document.getElementById('emiSchedPeriodHeader').textContent = emiState.scheduleView === 'yearly' ? 'Year' : 'Month';
+      document.getElementById('emiScheduleBody').innerHTML = rowsToShow.map(row => `
+        <tr>
+          <td>${row.label}</td>
+          <td class="num">${formatINR(row.opening)}</td>
+          <td class="num">${formatINR(row.emi)}</td>
+          <td class="num" style="color:var(--brand-emerald);">${formatINR(row.principal)}</td>
+          <td class="num" style="color:var(--brand-amber);">${formatINR(row.interest)}</td>
+          <td class="num">${formatINR(row.closing)}</td>
+        </tr>
+      `).join('');
+    }
+
+    // ========================================================================
+    // CALCULATOR 2: SIP CALCULATOR
+    // ========================================================================
+    function computeSIP() {
+      const P = Math.max(100, parseFloat(document.getElementById('sipMonthly').value) || 15000);
+      const annualReturn = Math.max(0.5, parseFloat(document.getElementById('sipRate').value) || 12);
+      const years = Math.max(1, parseInt(document.getElementById('sipYears').value, 10) || 15);
+
+      document.getElementById('sipMonthlyWords').textContent = `${formatINR(P)} / month (${formatLakhsCrores(P * 12)} / year)`;
+
+      const i = annualReturn / 12 / 100;
+      const n = years * 12;
+
+      const fv = P * ((Math.pow(1 + i, n) - 1) / i) * (1 + i);
+      const totalInvested = P * n;
+      const estReturns = Math.max(0, fv - totalInvested);
+
+      document.getElementById('sipOutFutureValue').textContent = formatINR(fv);
+      document.getElementById('sipOutSubText').textContent = `After ${years} years (${n} monthly SIP installments at ${annualReturn}% p.a.)`;
+      document.getElementById('sipOutInvested').textContent = formatINR(totalInvested);
+      document.getElementById('sipOutReturns').textContent = formatINR(estReturns);
+
+      const invPct = fv > 0 ? (totalInvested / fv) * 100 : 50;
+      const retPct = Math.max(0, 100 - invPct);
+      const circle = document.getElementById('sipDonutInvestedCircle');
+      if (circle) {
+        circle.setAttribute('stroke-dasharray', `${invPct.toFixed(2)} ${(100 - invPct).toFixed(2)}`);
+      }
+      document.getElementById('sipLegendInvested').textContent = `Invested: ${invPct.toFixed(1)}%`;
+      document.getElementById('sipLegendReturns').textContent = `Wealth Gained: ${retPct.toFixed(1)}%`;
+    }
+
+    // ========================================================================
+    // CALCULATOR 3: GST CALCULATOR (EXCLUSIVE & INCLUSIVE + CUSTOM RATE)
+    // ========================================================================
+    const gstState = {
+      mode: 'exclusive', // 'exclusive' | 'inclusive'
+      supply: 'intra' // 'intra' | 'inter'
+    };
+
+    function computeGST() {
+      const amount = Math.max(0, parseFloat(document.getElementById('gstAmount').value) || 25000);
+      const rate = Math.max(0, parseFloat(document.getElementById('gstRate').value) || 18);
+
+      let netAmount = 0;
+      let totalGst = 0;
+      let postTaxAmount = 0;
+
+      if (gstState.mode === 'exclusive') {
+        netAmount = amount;
+        totalGst = amount * (rate / 100);
+        postTaxAmount = netAmount + totalGst;
+      } else {
+        postTaxAmount = amount;
+        netAmount = amount / (1 + rate / 100);
+        totalGst = postTaxAmount - netAmount;
+      }
+
+      document.getElementById('gstOutPostTax').textContent = formatINRDec(postTaxAmount);
+      document.getElementById('gstOutModeSub').textContent = `Net Pre-Tax: ${formatINRDec(netAmount)} + Total GST (${rate}%): ${formatINRDec(totalGst)}`;
+      document.getElementById('gstOutNet').textContent = formatINRDec(netAmount);
+      document.getElementById('gstOutTotalTax').textContent = formatINRDec(totalGst);
+
+      if (gstState.supply === 'intra') {
+        const halfRate = (rate / 2).toFixed(2).replace(/\.00$/, '');
+        document.getElementById('gstOutSplit1Label').textContent = `CGST (${halfRate}%)`;
+        document.getElementById('gstOutSplit1Val').textContent = formatINRDec(totalGst / 2);
+        document.getElementById('gstOutSplit2Label').textContent = `SGST (${halfRate}%)`;
+        document.getElementById('gstOutSplit2Val').textContent = formatINRDec(totalGst / 2);
+      } else {
+        document.getElementById('gstOutSplit1Label').textContent = `IGST (${rate}%)`;
+        document.getElementById('gstOutSplit1Val').textContent = formatINRDec(totalGst);
+        document.getElementById('gstOutSplit2Label').textContent = `CGST / SGST`;
+        document.getElementById('gstOutSplit2Val').textContent = '₹0.00 (Inter-State)';
+      }
+    }
+
+    // ========================================================================
+    // CALCULATOR 4: INDIAN INCOME TAX CALCULATOR (NEW VS OLD REGIME)
+    // ========================================================================
+    function computeIncomeTax() {
+      const ay = document.getElementById('taxAySelect').value;
+      const gross = Math.max(0, parseFloat(document.getElementById('taxGrossIncome').value) || 1400000);
+      const ageBracket = document.getElementById('taxAgeBracket').value;
+      const ded80C = Math.min(150000, Math.max(0, parseFloat(document.getElementById('taxDed80C').value) || 0));
+      const ded80D = Math.max(0, parseFloat(document.getElementById('taxDed80D').value) || 0);
+      const dedHra = Math.max(0, parseFloat(document.getElementById('taxDedHra').value) || 0);
+
+      document.getElementById('taxGrossWords').textContent = formatLakhsCrores(gross);
+
+      // NEW REGIME CALCULATION (₹75,000 Standard Deduction)
+      const stdDedNew = 75000;
+      const taxableNew = Math.max(0, gross - stdDedNew);
+      let baseTaxNew = 0;
+
+      if (ay === '2026-27') {
+        // Latest FY 2025-26 / AY 2026-27 slabs: 0-4L:0, 4-8L:5%, 8-12L:10%, 12-16L:15%, 16-20L:20%, 20-24L:25%, >24L:30%
+        if (taxableNew > 400000) baseTaxNew += Math.min(400000, taxableNew - 400000) * 0.05;
+        if (taxableNew > 800000) baseTaxNew += Math.min(400000, taxableNew - 800000) * 0.10;
+        if (taxableNew > 1200000) baseTaxNew += Math.min(400000, taxableNew - 1200000) * 0.15;
+        if (taxableNew > 1600000) baseTaxNew += Math.min(400000, taxableNew - 1600000) * 0.20;
+        if (taxableNew > 2000000) baseTaxNew += Math.min(400000, taxableNew - 2000000) * 0.25;
+        if (taxableNew > 2400000) baseTaxNew += (taxableNew - 2400000) * 0.30;
+        // Section 87A Rebate up to ₹12,00,000 taxable income
+        if (taxableNew <= 1200000) baseTaxNew = 0;
+      } else {
+        // AY 2025-26 slabs: 0-3L:0, 3-7L:5%, 7-10L:10%, 10-12L:15%, 12-15L:20%, >15L:30%
+        if (taxableNew > 300000) baseTaxNew += Math.min(400000, taxableNew - 300000) * 0.05;
+        if (taxableNew > 700000) baseTaxNew += Math.min(300000, taxableNew - 700000) * 0.10;
+        if (taxableNew > 1000000) baseTaxNew += Math.min(200000, taxableNew - 1000000) * 0.15;
+        if (taxableNew > 1200000) baseTaxNew += Math.min(300000, taxableNew - 1200000) * 0.20;
+        if (taxableNew > 1500000) baseTaxNew += (taxableNew - 1500000) * 0.30;
+        if (taxableNew <= 700000) baseTaxNew = 0;
+      }
+
+      const cessNew = baseTaxNew * 0.04;
+      const totalTaxNew = baseTaxNew + cessNew;
+
+      // OLD REGIME CALCULATION (₹50,000 Standard Deduction + 80C + 80D + HRA/24b)
+      const stdDedOld = 50000;
+      const totalDedOld = stdDedOld + ded80C + ded80D + dedHra;
+      const taxableOld = Math.max(0, gross - totalDedOld);
+      let baseTaxOld = 0;
+
+      const basicExemptionOld = ageBracket === 'above80' ? 500000 : (ageBracket === '60to80' ? 300000 : 250000);
+      if (taxableOld > basicExemptionOld && taxableOld > 250000) {
+        const slab5Span = Math.max(0, Math.min(500000, taxableOld) - basicExemptionOld);
+        baseTaxOld += slab5Span * 0.05;
+      }
+      if (taxableOld > 500000) {
+        baseTaxOld += Math.min(500000, taxableOld - 500000) * 0.20;
+      }
+      if (taxableOld > 1000000) {
+        baseTaxOld += (taxableOld - 1000000) * 0.30;
+      }
+      // Sec 87A Rebate in Old Regime up to ₹5,00,000
+      if (taxableOld <= 500000) {
+        baseTaxOld = 0;
+      }
+
+      const cessOld = baseTaxOld * 0.04;
+      const totalTaxOld = baseTaxOld + cessOld;
+
+      // Populate Table
+      document.getElementById('taxRowGrossNew').textContent = formatINR(gross);
+      document.getElementById('taxRowGrossOld').textContent = formatINR(gross);
+      document.getElementById('taxRowDedNew').textContent = formatINR(stdDedNew);
+      document.getElementById('taxRowDedOld').textContent = formatINR(totalDedOld);
+      document.getElementById('taxRowTaxableNew').textContent = formatINR(taxableNew);
+      document.getElementById('taxRowTaxableOld').textContent = formatINR(taxableOld);
+      document.getElementById('taxRowBaseNew').textContent = formatINR(baseTaxNew);
+      document.getElementById('taxRowBaseOld').textContent = formatINR(baseTaxOld);
+      document.getElementById('taxRowCessNew').textContent = formatINR(cessNew);
+      document.getElementById('taxRowCessOld').textContent = formatINR(cessOld);
+      document.getElementById('taxRowTotalNew').textContent = formatINR(totalTaxNew);
+      document.getElementById('taxRowTotalOld').textContent = formatINR(totalTaxOld);
+
+      const diff = Math.abs(totalTaxOld - totalTaxNew);
+      const badgeEl = document.getElementById('taxOutWinnerBadge');
+      if (totalTaxNew < totalTaxOld) {
+        badgeEl.textContent = `New Regime Saves You ${formatINR(diff)}`;
+      } else if (totalTaxOld < totalTaxNew) {
+        badgeEl.textContent = `Old Regime Saves You ${formatINR(diff)}`;
+      } else {
+        badgeEl.textContent = `Both Regimes Result in Same Tax (${formatINR(totalTaxNew)})`;
+      }
+    }
+
+    // ========================================================================
+    // CALCULATOR 5: EXACT AGE CALCULATOR + NEXT BIRTHDAY COUNTDOWN
+    // ========================================================================
+    function computeAge() {
+      const dobVal = document.getElementById('ageDob').value;
+      const asOfVal = document.getElementById('ageAsOf').value;
+      if (!dobVal || !asOfVal) return;
+
+      const dob = new Date(dobVal + 'T00:00:00');
+      const asOf = new Date(asOfVal + 'T00:00:00');
+      const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+      if (asOf < dob) {
+        document.getElementById('ageOutExactYMD').textContent = 'Date of Birth must be before As-Of Date';
+        return;
+      }
+
+      let years = asOf.getFullYear() - dob.getFullYear();
+      let months = asOf.getMonth() - dob.getMonth();
+      let days = asOf.getDate() - dob.getDate();
+
+      if (days < 0) {
+        months--;
+        const daysInPrevMonth = new Date(asOf.getFullYear(), asOf.getMonth(), 0).getDate();
+        days += daysInPrevMonth;
+      }
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+
+      const totalDays = Math.round((asOf - dob) / 86400000);
+      const totalWeeks = Math.floor(totalDays / 7);
+      const totalMonths = years * 12 + months;
+      const totalHours = totalDays * 24;
+
+      document.getElementById('ageOutExactYMD').textContent = `${years} Years, ${months} Months, ${days} Days`;
+      document.getElementById('ageOutBornDay').textContent = `Born on ${weekdays[dob.getDay()]}, ${dobVal}`;
+      document.getElementById('ageOutTotalMonths').textContent = `${inNumFormatter.format(totalMonths)} Months`;
+      document.getElementById('ageOutTotalWeeks').textContent = `${inNumFormatter.format(totalWeeks)} Weeks`;
+      document.getElementById('ageOutTotalDays').textContent = `${inNumFormatter.format(totalDays)} Days`;
+      document.getElementById('ageOutTotalHours').textContent = `${inNumFormatter.format(totalHours)} Hours`;
+
+      // Next Birthday Countdown in exact Months and Days
+      let nextBday = new Date(asOf.getFullYear(), dob.getMonth(), dob.getDate());
+      if (nextBday < asOf) {
+        nextBday = new Date(asOf.getFullYear() + 1, dob.getMonth(), dob.getDate());
+      }
+
+      let remMonths = nextBday.getMonth() - asOf.getMonth() + (12 * (nextBday.getFullYear() - asOf.getFullYear()));
+      let remDays = nextBday.getDate() - asOf.getDate();
+      if (remDays < 0) {
+        remMonths--;
+        const prevMonthDays = new Date(nextBday.getFullYear(), nextBday.getMonth(), 0).getDate();
+        remDays += prevMonthDays;
+      }
+
+      const bdayWeekday = weekdays[nextBday.getDay()];
+      const nextBdayIso = nextBday.getFullYear() + '-' + String(nextBday.getMonth() + 1).padStart(2, '0') + '-' + String(nextBday.getDate()).padStart(2, '0');
+
+      if (remMonths === 0 && remDays === 0) {
+        document.getElementById('ageOutNextBday').textContent = `🎉 Happy Birthday! Today (${bdayWeekday}, ${nextBdayIso}) is your birthday!`;
+      } else {
+        document.getElementById('ageOutNextBday').textContent = `${remMonths} Months and ${remDays} Days remaining until your next birthday on ${bdayWeekday}, ${nextBdayIso}.`;
+      }
+    }
+
+    // ========================================================================
+    // CALCULATOR 6: PERCENTAGE CALCULATOR (3-IN-1 UTILITY)
+    // ========================================================================
+    function computePct1() {
+      const x = parseFloat(document.getElementById('pct1X').value) || 0;
+      const y = parseFloat(document.getElementById('pct1Y').value) || 0;
+      const res = (x / 100) * y;
+      document.getElementById('pct1Out').textContent = `${inNumFormatter.format(res)} (${x}% of ${inNumFormatter.format(y)})`;
+    }
+
+    function computePct2() {
+      const x = parseFloat(document.getElementById('pct2X').value) || 0;
+      const y = parseFloat(document.getElementById('pct2Y').value) || 0;
+      if (y === 0) {
+        document.getElementById('pct2Out').textContent = 'Cannot divide by zero';
+        return;
+      }
+      const res = (x / y) * 100;
+      document.getElementById('pct2Out').textContent = `${res.toFixed(2)}% (${inNumFormatter.format(x)} out of ${inNumFormatter.format(y)})`;
+    }
+
+    function computePct3() {
+      const a = parseFloat(document.getElementById('pct3A').value) || 0;
+      const b = parseFloat(document.getElementById('pct3B').value) || 0;
+      if (a === 0) {
+        document.getElementById('pct3Out').textContent = 'Initial Value (A) cannot be zero';
+        return;
+      }
+      const diff = b - a;
+      const pctChange = (diff / Math.abs(a)) * 100;
+      const dir = diff >= 0 ? 'Increase' : 'Decrease';
+      const sign = diff >= 0 ? '+' : '';
+      document.getElementById('pct3Out').textContent = `${sign}${pctChange.toFixed(2)}% ${dir} (Absolute Difference: ${sign}${inNumFormatter.format(diff)})`;
+    }
+
+    // ========================================================================
+    // CALCULATOR 7: DATE DIFFERENCE CALCULATOR
+    // ========================================================================
+    function computeDateDiff() {
+      const sVal = document.getElementById('ddStartDate').value;
+      const eVal = document.getElementById('ddEndDate').value;
+      const includeEnd = document.getElementById('ddIncludeEnd').checked;
+      if (!sVal || !eVal) return;
+
+      const d1 = new Date(sVal + 'T00:00:00');
+      const d2 = new Date(eVal + 'T00:00:00');
+      const start = d1 <= d2 ? new Date(d1) : new Date(d2);
+      const end = d1 <= d2 ? new Date(d2) : new Date(d1);
+
+      // Compute exact calendar Y-M-D
+      const effectiveEnd = new Date(end);
+      if (includeEnd) {
+        effectiveEnd.setDate(effectiveEnd.getDate() + 1);
+      }
+
+      let years = effectiveEnd.getFullYear() - start.getFullYear();
+      let months = effectiveEnd.getMonth() - start.getMonth();
+      let days = effectiveEnd.getDate() - start.getDate();
+
+      if (days < 0) {
+        months--;
+        const prevMonthDays = new Date(effectiveEnd.getFullYear(), effectiveEnd.getMonth(), 0).getDate();
+        days += prevMonthDays;
+      }
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+
+      let totalDays = Math.round((end - start) / 86400000);
+      if (includeEnd) totalDays += 1;
+
+      const weeks = Math.floor(totalDays / 7);
+      const remDays = totalDays % 7;
+
+      // Count working weekdays vs weekends
+      let weekdaysCount = 0;
+      let weekendsCount = 0;
+      const runner = new Date(start);
+      const maxCheck = Math.min(totalDays, 40000);
+      for (let i = 0; i < maxCheck; i++) {
+        const dow = runner.getDay();
+        if (dow === 0 || dow === 6) weekendsCount++;
+        else weekdaysCount++;
+        runner.setDate(runner.getDate() + 1);
+      }
+
+      document.getElementById('ddOutYMD').textContent = `${years} Years, ${months} Months, ${days} Days`;
+      document.getElementById('ddOutSub').textContent = includeEnd
+        ? 'Inclusive of End Date (+1 calendar day applied)'
+        : 'Exclusive of End Date';
+      document.getElementById('ddOutTotalDays').textContent = `${inNumFormatter.format(totalDays)} Days`;
+      document.getElementById('ddOutWeeks').textContent = `${inNumFormatter.format(weeks)} Weeks, ${remDays} Days`;
+      document.getElementById('ddOutWeekdays').textContent = `${inNumFormatter.format(weekdaysCount)} Days`;
+      document.getElementById('ddOutWeekends').textContent = `${inNumFormatter.format(weekendsCount)} Days`;
+    }
+
+    // ========================================================================
+    // CALCULATOR 8: BMI CALCULATOR (INDIAN / ASIAN-INDIAN CUT-OFFS)
+    // ========================================================================
+    const bmiState = {
+      unit: 'cm' // 'cm' | 'ft'
+    };
+
+    function computeBMI() {
+      const weight = Math.max(10, parseFloat(document.getElementById('bmiWeight').value) || 70);
+      let heightCm = 170;
+
+      if (bmiState.unit === 'cm') {
+        heightCm = Math.max(50, parseFloat(document.getElementById('bmiHeightCm').value) || 170);
+      } else {
+        const ft = Math.max(2, parseFloat(document.getElementById('bmiHeightFeet').value) || 5);
+        const inc = Math.max(0, parseFloat(document.getElementById('bmiHeightInches').value) || 7);
+        heightCm = (ft * 30.48) + (inc * 2.54);
+        document.getElementById('bmiHeightCm').value = heightCm.toFixed(1);
+      }
+
+      const heightM = heightCm / 100;
+      const bmi = weight / (heightM * heightM);
+
+      // Indian Ministry of Health / Asian-Indian Cut-offs: <18.0 Underweight, 18.0-22.9 Normal, 23.0-24.9 Overweight, >=25.0 Obese
+      let indianStatus = 'Normal / Healthy Weight';
+      let indianColor = 'var(--brand-emerald)';
+      if (bmi < 18.0) {
+        indianStatus = 'Underweight (<18.0)';
+        indianColor = 'var(--brand-amber)';
+      } else if (bmi < 23.0) {
+        indianStatus = 'Normal Weight (18.0–22.9)';
+        indianColor = 'var(--brand-emerald)';
+      } else if (bmi < 25.0) {
+        indianStatus = 'Overweight / At Risk (23.0–24.9)';
+        indianColor = 'var(--brand-amber)';
+      } else {
+        indianStatus = 'Obese (≥25.0)';
+        indianColor = 'var(--brand-rose)';
+      }
+
+      // Standard WHO Cut-offs: <18.5 Underweight, 18.5-24.9 Normal, 25.0-29.9 Overweight, >=30.0 Obese
+      let whoStatus = 'Normal Weight (18.5–24.9)';
+      if (bmi < 18.5) whoStatus = 'Underweight (<18.5)';
+      else if (bmi < 25.0) whoStatus = 'Normal Weight (18.5–24.9)';
+      else if (bmi < 30.0) whoStatus = 'Overweight (25.0–29.9)';
+      else whoStatus = 'Obese (≥30.0)';
+
+      const minHealthyKg = (18.0 * heightM * heightM).toFixed(1);
+      const maxHealthyKg = (22.9 * heightM * heightM).toFixed(1);
+      const overMinKg = (23.0 * heightM * heightM).toFixed(1);
+      const overMaxKg = (24.9 * heightM * heightM).toFixed(1);
+      const obeseMinKg = (25.0 * heightM * heightM).toFixed(1);
+
+      document.getElementById('bmiOutScore').textContent = `${bmi.toFixed(1)} kg/m²`;
+      document.getElementById('bmiOutHealthyRange').textContent = `Healthy Indian Weight Range (BMI 18.0–22.9) for ${heightCm.toFixed(1)} cm: ${minHealthyKg} kg – ${maxHealthyKg} kg`;
+
+      const indEl = document.getElementById('bmiOutIndianStatus');
+      indEl.textContent = indianStatus;
+      indEl.style.color = indianColor;
+
+      document.getElementById('bmiOutWhoStatus').textContent = whoStatus;
+
+      document.getElementById('bmiWtUnder').textContent = `< ${minHealthyKg} kg`;
+      document.getElementById('bmiWtNormal').textContent = `${minHealthyKg} – ${maxHealthyKg} kg`;
+      document.getElementById('bmiWtOver').textContent = `${overMinKg} – ${overMaxKg} kg`;
+      document.getElementById('bmiWtObese').textContent = `≥ ${obeseMinKg} kg`;
+    }
+
+    // ========================================================================
+    // INITIALIZE ALL EVENT LISTENERS ON DOMCONTENTLOADED
+    // ========================================================================
+    window.addEventListener('DOMContentLoaded', () => {
+      // Default Age As-Of Date to today if needed
+      const todayIso = new Date().toISOString().slice(0, 10);
+      const ageAsOfEl = document.getElementById('ageAsOf');
+      if (ageAsOfEl && !ageAsOfEl.value) {
+        ageAsOfEl.value = todayIso;
+      }
+
+      // Language Toggle Buttons
+      document.getElementById('btnLangEn').addEventListener('click', () => setLanguage('en'));
+      document.getElementById('btnLangHi').addEventListener('click', () => setLanguage('hi'));
+
+      // Accessibility Toggles
+      document.getElementById('a11yLargeTextBtn').addEventListener('click', () => {
+        document.body.classList.toggle('large-text-mode');
+        showToast('Toggled Large Text Accessibility Mode');
+      });
+      document.getElementById('a11yContrastBtn').addEventListener('click', () => {
+        document.body.classList.toggle('ultra-contrast-mode');
+        showToast('Toggled High-Contrast Border Mode');
+      });
+
+      // Top Calculator Tab Bar
+      document.querySelectorAll('.calc-tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          switchCalculatorTab(btn.dataset.tab);
+        });
+      });
+
+      // Sidebar Quick Calculator Directory Links
+      document.querySelectorAll('.dir-jump-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          switchCalculatorTab(btn.dataset.jump);
+          document.getElementById('calculators-workspace').scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+
+      // 1. EMI Form Listeners
+      const formEmi = document.getElementById('form-emi');
+      formEmi.addEventListener('submit', e => { e.preventDefault(); computeEMI(); });
+      formEmi.addEventListener('input', e => {
+        if (e.target.id === 'emiPrincipal') document.getElementById('emiPrincipalSlider').value = e.target.value;
+        if (e.target.id === 'emiPrincipalSlider') document.getElementById('emiPrincipal').value = e.target.value;
+        if (e.target.id === 'emiRate') document.getElementById('emiRateSlider').value = e.target.value;
+        if (e.target.id === 'emiRateSlider') document.getElementById('emiRate').value = e.target.value;
+        if (e.target.id === 'emiTenure') document.getElementById('emiTenureSlider').value = e.target.value;
+        if (e.target.id === 'emiTenureSlider') document.getElementById('emiTenure').value = e.target.value;
+        computeEMI();
+      });
+
+      document.querySelectorAll('.emi-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          document.querySelectorAll('.emi-chip').forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          document.getElementById('emiPrincipal').value = chip.dataset.amount;
+          document.getElementById('emiPrincipalSlider').value = chip.dataset.amount;
+          computeEMI();
+        });
+      });
+
+      document.getElementById('emiUnitYearsBtn').addEventListener('click', () => {
+        if (emiState.tenureUnit !== 'years') {
+          emiState.tenureUnit = 'years';
+          document.getElementById('emiUnitYearsBtn').classList.add('active');
+          document.getElementById('emiUnitMonthsBtn').classList.remove('active');
+          const curMonths = parseInt(document.getElementById('emiTenure').value, 10) || 240;
+          const yrs = Math.max(1, Math.round(curMonths / 12));
+          const slider = document.getElementById('emiTenureSlider');
+          slider.max = 30;
+          slider.value = yrs;
+          document.getElementById('emiTenure').value = yrs;
+          computeEMI();
+        }
+      });
+
+      document.getElementById('emiUnitMonthsBtn').addEventListener('click', () => {
+        if (emiState.tenureUnit !== 'months') {
+          emiState.tenureUnit = 'months';
+          document.getElementById('emiUnitMonthsBtn').classList.add('active');
+          document.getElementById('emiUnitYearsBtn').classList.remove('active');
+          const curYrs = parseInt(document.getElementById('emiTenure').value, 10) || 20;
+          const mos = curYrs * 12;
+          const slider = document.getElementById('emiTenureSlider');
+          slider.max = 360;
+          slider.value = mos;
+          document.getElementById('emiTenure').value = mos;
+          computeEMI();
+        }
+      });
+
+      document.getElementById('emiSchedYearlyBtn').addEventListener('click', () => {
+        emiState.scheduleView = 'yearly';
+        document.getElementById('emiSchedYearlyBtn').classList.add('active');
+        document.getElementById('emiSchedMonthlyBtn').classList.remove('active');
+        computeEMI();
+      });
+
+      document.getElementById('emiSchedMonthlyBtn').addEventListener('click', () => {
+        emiState.scheduleView = 'monthly';
+        document.getElementById('emiSchedMonthlyBtn').classList.add('active');
+        document.getElementById('emiSchedYearlyBtn').classList.remove('active');
+        computeEMI();
+      });
+
+      document.getElementById('emiPrintBtn').addEventListener('click', () => {
+        window.print();
+      });
+
+      // 2. SIP Form Listeners
+      const formSip = document.getElementById('form-sip');
+      formSip.addEventListener('submit', e => { e.preventDefault(); computeSIP(); });
+      formSip.addEventListener('input', e => {
+        if (e.target.id === 'sipMonthly') document.getElementById('sipMonthlySlider').value = e.target.value;
+        if (e.target.id === 'sipMonthlySlider') document.getElementById('sipMonthly').value = e.target.value;
+        if (e.target.id === 'sipRate') document.getElementById('sipRateSlider').value = e.target.value;
+        if (e.target.id === 'sipRateSlider') document.getElementById('sipRate').value = e.target.value;
+        if (e.target.id === 'sipYears') document.getElementById('sipYearsSlider').value = e.target.value;
+        if (e.target.id === 'sipYearsSlider') document.getElementById('sipYears').value = e.target.value;
+        computeSIP();
+      });
+
+      document.querySelectorAll('.sip-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          document.querySelectorAll('.sip-chip').forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          document.getElementById('sipMonthly').value = chip.dataset.sip;
+          document.getElementById('sipMonthlySlider').value = chip.dataset.sip;
+          computeSIP();
+        });
+      });
+
+      // 3. GST Form Listeners
+      const formGst = document.getElementById('form-gst');
+      formGst.addEventListener('submit', e => { e.preventDefault(); computeGST(); });
+      formGst.addEventListener('input', computeGST);
+
+      document.getElementById('gstModeExclusiveBtn').addEventListener('click', () => {
+        gstState.mode = 'exclusive';
+        document.getElementById('gstModeExclusiveBtn').classList.add('active');
+        document.getElementById('gstModeInclusiveBtn').classList.remove('active');
+        document.getElementById('gstAmountLabel').textContent = 'Original Pre-Tax Amount (₹)';
+        computeGST();
+      });
+
+      document.getElementById('gstModeInclusiveBtn').addEventListener('click', () => {
+        gstState.mode = 'inclusive';
+        document.getElementById('gstModeInclusiveBtn').classList.add('active');
+        document.getElementById('gstModeExclusiveBtn').classList.remove('active');
+        document.getElementById('gstAmountLabel').textContent = 'Gross GST-Inclusive Amount (₹)';
+        computeGST();
+      });
+
+      document.querySelectorAll('.gst-slab-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          document.querySelectorAll('.gst-slab-chip').forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          document.getElementById('gstRate').value = chip.dataset.rate;
+          computeGST();
+        });
+      });
+
+      document.getElementById('gstSupplyIntraBtn').addEventListener('click', () => {
+        gstState.supply = 'intra';
+        document.getElementById('gstSupplyIntraBtn').classList.add('active');
+        document.getElementById('gstSupplyInterBtn').classList.remove('active');
+        computeGST();
+      });
+
+      document.getElementById('gstSupplyInterBtn').addEventListener('click', () => {
+        gstState.supply = 'inter';
+        document.getElementById('gstSupplyInterBtn').classList.add('active');
+        document.getElementById('gstSupplyIntraBtn').classList.remove('active');
+        computeGST();
+      });
+
+      // 4. Income Tax Form Listeners
+      const formTax = document.getElementById('form-tax');
+      formTax.addEventListener('submit', e => { e.preventDefault(); computeIncomeTax(); });
+      formTax.addEventListener('input', computeIncomeTax);
+      formTax.addEventListener('change', computeIncomeTax);
+
+      // 5. Age Calculator Listeners
+      const formAge = document.getElementById('form-age');
+      formAge.addEventListener('submit', e => { e.preventDefault(); computeAge(); });
+      formAge.addEventListener('input', computeAge);
+
+      // 6. Percentage 3-in-1 Listeners
+      const fPct1 = document.getElementById('form-pct-1');
+      fPct1.addEventListener('submit', e => { e.preventDefault(); computePct1(); });
+      fPct1.addEventListener('input', computePct1);
+
+      const fPct2 = document.getElementById('form-pct-2');
+      fPct2.addEventListener('submit', e => { e.preventDefault(); computePct2(); });
+      fPct2.addEventListener('input', computePct2);
+
+      const fPct3 = document.getElementById('form-pct-3');
+      fPct3.addEventListener('submit', e => { e.preventDefault(); computePct3(); });
+      fPct3.addEventListener('input', computePct3);
+
+      // 7. Date Difference Listeners
+      const formDd = document.getElementById('form-datediff');
+      formDd.addEventListener('submit', e => { e.preventDefault(); computeDateDiff(); });
+      formDd.addEventListener('input', computeDateDiff);
+      formDd.addEventListener('change', computeDateDiff);
+
+      // 8. BMI Calculator Listeners
+      const formBmi = document.getElementById('form-bmi');
+      formBmi.addEventListener('submit', e => { e.preventDefault(); computeBMI(); });
+      formBmi.addEventListener('input', computeBMI);
+      formBmi.addEventListener('change', computeBMI);
+
+      document.getElementById('bmiUnitCmBtn').addEventListener('click', () => {
+        bmiState.unit = 'cm';
+        document.getElementById('bmiUnitCmBtn').classList.add('active');
+        document.getElementById('bmiUnitFtBtn').classList.remove('active');
+        document.getElementById('bmiCmWrap').style.display = 'flex';
+        document.getElementById('bmiFtWrap').style.display = 'none';
+        computeBMI();
+      });
+
+      document.getElementById('bmiUnitFtBtn').addEventListener('click', () => {
+        bmiState.unit = 'ft';
+        document.getElementById('bmiUnitFtBtn').classList.add('active');
+        document.getElementById('bmiUnitCmBtn').classList.remove('active');
+        document.getElementById('bmiCmWrap').style.display = 'none';
+        document.getElementById('bmiFtWrap').style.display = 'grid';
+        computeBMI();
+      });
+
+      // Run initial computations for all 8 calculators
+      computeEMI();
+      computeSIP();
+      computeGST();
+      computeIncomeTax();
+      computeAge();
+      computePct1();
+      computePct2();
+      computePct3();
+      computeDateDiff();
+      computeBMI();
+    });
+  </script>
+
+  <!-- Load Official Google Translate Script After Main Script Defines googleTranslateElementInit -->
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async defer></script>
+</body>
+</html>
