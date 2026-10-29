@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DML8QJ81ZP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-DML8QJ81ZP');
-</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NeiharDario</title>
@@ -405,7 +396,7 @@
     }
     .layout-grid-70-30 {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr); /* minmax(0,…) stops wide tables from forcing sideways scroll on phones */
       gap: 32px;
       align-items: start;
     }
@@ -926,6 +917,171 @@
       line-height: 1.65;
     }
 
+    /* ==========================================================================
+       EMI PLANNER TOOLKIT (chart, prepayment, affordability, compare, lenders, saved plans)
+       ========================================================================== */
+    .tool-section {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 2px solid #e2e8f0;
+      scroll-margin-top: 190px;
+    }
+    .tool-title {
+      font-size: 1.2rem;
+      font-weight: 900;
+      margin: 0 0 6px 0;
+      color: var(--text-primary);
+    }
+    .tool-desc {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin: 0 0 16px 0;
+    }
+    .tool-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    @media (min-width: 768px) {
+      .tool-grid.cols-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    .scenario-card {
+      background-color: var(--bg-subtle);
+      border: 2px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 14px;
+    }
+    .scenario-card h3 {
+      margin: 0 0 10px 0;
+      font-size: 0.98rem;
+      font-weight: 900;
+      color: var(--brand-blue-dark);
+    }
+    .mini-field {
+      margin-bottom: 10px;
+    }
+    .mini-field label {
+      display: block;
+      font-size: 0.78rem;
+      margin-bottom: 3px;
+    }
+    .lender-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 10px;
+      align-items: end;
+      margin-bottom: 10px;
+    }
+    .lender-grid label {
+      font-size: 0.78rem;
+      display: block;
+      margin-bottom: 3px;
+    }
+    .best-cell {
+      background-color: #d1fae5;
+      color: #064e3b !important;
+      font-weight: 900;
+    }
+    .best-tag {
+      display: inline-block;
+      margin-left: 6px;
+      font-size: 0.66rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      background-color: #047857;
+      color: #ffffff;
+      padding: 1px 6px;
+      border-radius: 4px;
+      vertical-align: middle;
+    }
+    .bar-chart-wrap {
+      background-color: #ffffff;
+      border: 2px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 12px;
+    }
+    .chart-legend-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 8px;
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+    .insight-list {
+      list-style: none;
+      padding: 0;
+      margin: 14px 0 0 0;
+      display: grid;
+      gap: 8px;
+    }
+    .insight-list li {
+      background-color: var(--bg-emerald-tint);
+      border: 2px solid #6ee7b7;
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #064e3b;
+    }
+    .afford-meter {
+      position: relative;
+      height: 16px;
+      border-radius: 999px;
+      border: 2px solid #334155;
+      background: linear-gradient(to right, #10b981 0%, #10b981 50%, #f59e0b 50%, #f59e0b 66.67%, #e11d48 66.67%, #e11d48 100%);
+      margin: 18px 0 4px 0;
+    }
+    .afford-marker {
+      position: absolute;
+      top: -9px;
+      width: 8px;
+      height: 30px;
+      background-color: #020617;
+      border: 2px solid #ffffff;
+      border-radius: 4px;
+      transform: translateX(-50%);
+      transition: left 0.2s ease;
+    }
+    .afford-scale {
+      position: relative;
+      height: 18px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--text-muted);
+    }
+    .afford-scale span {
+      position: absolute;
+      transform: translateX(-50%);
+    }
+    .tk-chip-link {
+      text-decoration: none;
+      display: inline-block;
+    }
+    .saved-actions button {
+      appearance: none;
+      border: 1.5px solid var(--border-strong);
+      background-color: #f1f5f9;
+      color: var(--text-primary);
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 4px 9px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-right: 4px;
+    }
+    .saved-actions button:hover {
+      background-color: #e2e8f0;
+    }
+    @media print {
+      .tk-noprint {
+        display: none !important;
+      }
+    }
+
     /* Toast Notification */
     .toast-box {
       position: fixed;
@@ -946,20 +1102,53 @@
       display: block;
     }
 
-    /* Print Styles for Amortization PDF Export */
+    /* ==========================================================================
+       PRINT & PDF EXPORT STYLES (GanitSetu / United Airlines Theme Match)
+       ========================================================================== */
     @media print {
       .top-utility-bar,
       .site-header,
       .sidebar-sticky-wrap,
-      .btn-row {
+      .btn-row,
+      .calc-tabs-nav,
+      .Quick-nav-links,
+      #editorial-guide,
+      #about,
+      #disclaimer,
+      #faq {
         display: none !important;
       }
+      body {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+      }
+      .portal-container {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
       .layout-grid-70-30 {
+        display: block !important;
+      }
+      .card-box {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .calc-panel {
         display: block !important;
       }
       .table-scroll-box {
         max-height: none !important;
         overflow: visible !important;
+        border: 1px solid #000 !important;
+      }
+      table.data-table th {
+        background-color: #1e3a8a !important;
+        color: #ffffff !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
       }
     }
   </style>
@@ -1060,6 +1249,10 @@
               <h1 id="title-emi" class="calc-title">EMI Calculator &amp; Amortization Schedule</h1>
               <p class="calc-desc">Calculate your monthly loan installment (EMI), total interest cost, and month-by-month or year-by-year repayment schedule.</p>
             </div>
+            <!-- Print / PDF Save Action Button -->
+            <div>
+              <button type="button" class="btn-secondary" onclick="window.print()">🖨️ Print / Save PDF</button>
+            </div>
           </div>
 
           <div class="calc-workspace-grid">
@@ -1102,7 +1295,6 @@
 
               <div class="btn-row">
                 <button type="submit" class="btn-primary">Calculate EMI</button>
-                <button type="button" id="emiPrintBtn" class="btn-secondary">🖨️ Print / Save PDF</button>
               </div>
             </form>
 
@@ -1174,6 +1366,271 @@
               </table>
             </div>
           </div>
+
+          <!-- ================================================================
+               EMI PLANNER TOOLKIT: chart + insights, prepayment, affordability,
+               scenario comparison, lender comparison, saved plans
+               ================================================================ -->
+          <div id="emiToolkit">
+
+            <nav class="chip-row tk-noprint" aria-label="Loan planner shortcuts" style="margin-top:28px;">
+              <a class="quick-chip tk-chip-link" href="#tk-chart">📊 Chart &amp; Insights</a>
+              <a class="quick-chip tk-chip-link" href="#tk-prepay">💸 Prepayment</a>
+              <a class="quick-chip tk-chip-link" href="#tk-afford">🧮 Affordability</a>
+              <a class="quick-chip tk-chip-link" href="#tk-compare">⚖️ Compare Scenarios</a>
+              <a class="quick-chip tk-chip-link" href="#tk-lenders">🏦 Compare Lenders</a>
+              <a class="quick-chip tk-chip-link" href="#tk-saved">⭐ Saved Plans</a>
+            </nav>
+
+            <!-- 1. Visual repayment chart + smart insights -->
+            <div class="tool-section" id="tk-chart">
+              <h2 class="tool-title">📊 Repayment Chart &amp; Smart Insights</h2>
+              <p class="tool-desc">See how each year's payments split between principal and interest, and how quickly your outstanding balance falls. Hover or tap a bar for exact amounts.</p>
+              <div class="bar-chart-wrap">
+                <svg id="tkYearChart" viewBox="0 0 680 280" role="img" aria-label="Yearly principal and interest paid, with the outstanding loan balance line" style="width:100%; height:auto; display:block;"></svg>
+                <div class="chart-legend-row">
+                  <span class="legend-item"><span class="legend-swatch" style="background:#1d4ed8;"></span>Principal paid (left axis)</span>
+                  <span class="legend-item"><span class="legend-swatch" style="background:#d97706;"></span>Interest paid (left axis)</span>
+                  <span class="legend-item"><span class="legend-swatch" style="background:#047857;"></span>Outstanding balance (right axis)</span>
+                </div>
+              </div>
+              <ul id="tkInsights" class="insight-list" aria-live="polite"></ul>
+            </div>
+
+            <!-- 2. Prepayment savings planner -->
+            <div class="tool-section tk-noprint" id="tk-prepay">
+              <h2 class="tool-title">💸 Prepayment Savings Planner</h2>
+              <p class="tool-desc">What if you pay extra every month, or prepay a lump sum? Your EMI stays the same and the loan closes sooner. Check your lender's prepayment and foreclosure charges before relying on these savings.</p>
+              <div class="calc-workspace-grid">
+                <div>
+                  <div class="form-group">
+                    <div class="form-label-row">
+                      <label for="tkExtraMonthly">Extra payment every month (₹)</label>
+                      <input type="number" id="tkExtraMonthly" class="input-number-inline" value="2000" min="0" step="500" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="form-label-row">
+                      <label for="tkLumpAmount">One-time lump-sum prepayment (₹)</label>
+                      <input type="number" id="tkLumpAmount" class="input-number-inline" value="100000" min="0" step="10000" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="form-label-row">
+                      <label for="tkLumpMonth">Lump sum paid after EMI number</label>
+                      <input type="number" id="tkLumpMonth" class="input-number-inline" value="12" min="1" step="1" />
+                    </div>
+                  </div>
+                  <div class="form-group" style="padding-top:12px; border-top:2px dashed #cbd5e1;">
+                    <div class="form-label-row">
+                      <label for="tkCloseMonth">Or close the whole loan after EMI number</label>
+                      <input type="number" id="tkCloseMonth" class="input-number-inline" value="60" min="1" step="1" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="output-region" aria-live="polite">
+                  <div class="kpi-hero">
+                    <div class="kpi-hero-label">Total Interest Saved</div>
+                    <div id="tkPpSaved" class="kpi-hero-value">₹0</div>
+                    <div id="tkPpSavedSub" class="kpi-hero-sub">Enter an extra amount or a lump sum.</div>
+                  </div>
+                  <div class="kpi-sub-grid">
+                    <div class="kpi-mini-card">
+                      <div class="kpi-mini-label">Time Saved</div>
+                      <div id="tkPpTimeSaved" class="kpi-mini-val" style="color:var(--brand-emerald);">—</div>
+                    </div>
+                    <div class="kpi-mini-card">
+                      <div class="kpi-mini-label">New Loan Term</div>
+                      <div id="tkPpNewTerm" class="kpi-mini-val">—</div>
+                    </div>
+                    <div class="kpi-mini-card">
+                      <div class="kpi-mini-label">Interest Without Prepaying</div>
+                      <div id="tkPpOldInterest" class="kpi-mini-val">—</div>
+                    </div>
+                    <div class="kpi-mini-card">
+                      <div class="kpi-mini-label">Interest With Prepaying</div>
+                      <div id="tkPpNewInterest" class="kpi-mini-val" style="color:var(--brand-amber);">—</div>
+                    </div>
+                  </div>
+                  <div id="tkPpEmiNote" class="official-callout" style="margin-top:0;"></div>
+                  <div class="official-callout" style="margin-top:12px; background-color:var(--bg-emerald-tint); border-color:var(--brand-emerald); color:#064e3b;">
+                    🔚 <strong>Closing after EMI <span id="tkCloseMonthLabel">60</span>:</strong>
+                    outstanding balance to pay <strong id="tkCloseBalance">—</strong>; interest saved versus running the full tenure <strong id="tkCloseSaved">—</strong>.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Affordability meter -->
+            <div class="tool-section tk-noprint" id="tk-afford">
+              <h2 class="tool-title">🧮 Affordability Meter</h2>
+              <p class="tool-desc">Can you comfortably carry this loan? As a general rule of thumb, total EMIs up to about 30% of monthly take-home income are comfortable, 30–40% is tight, and above 40% is high risk. This is a guideline, not any lender's policy.</p>
+              <div class="calc-workspace-grid">
+                <div>
+                  <div class="form-group">
+                    <div class="form-label-row">
+                      <label for="tkIncome">Monthly take-home income (₹)</label>
+                      <input type="number" id="tkIncome" class="input-number-inline" value="100000" min="0" step="5000" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="form-label-row">
+                      <label for="tkOtherEmi">Other EMIs you already pay (₹/month)</label>
+                      <input type="number" id="tkOtherEmi" class="input-number-inline" value="0" min="0" step="1000" />
+                    </div>
+                  </div>
+                </div>
+                <div class="output-region" aria-live="polite">
+                  <div class="kpi-hero">
+                    <div class="kpi-hero-label">Total EMI Burden</div>
+                    <div id="tkAfPct" class="kpi-hero-value">—</div>
+                    <div id="tkAfLabel" class="kpi-hero-sub">Enter your monthly income to see your comfort level.</div>
+                  </div>
+                  <div class="afford-meter" role="img" aria-label="Affordability meter">
+                    <div id="tkAfMarker" class="afford-marker" style="left:0%;"></div>
+                  </div>
+                  <div class="afford-scale" aria-hidden="true">
+                    <span style="left:0%; transform:none;">0%</span>
+                    <span style="left:50%;">30%</span>
+                    <span style="left:66.67%;">40%</span>
+                    <span style="left:100%; transform:translateX(-100%);">60%+</span>
+                  </div>
+                  <div class="kpi-sub-grid" style="margin-top:12px;">
+                    <div class="kpi-mini-card">
+                      <div class="kpi-mini-label">This Loan's EMI vs Income</div>
+                      <div id="tkAfLoanPct" class="kpi-mini-val">—</div>
+                    </div>
+                    <div class="kpi-mini-card">
+                      <div class="kpi-mini-label">Comfortable EMI (≤30%)</div>
+                      <div id="tkAfSafeEmi" class="kpi-mini-val" style="color:var(--brand-emerald);">—</div>
+                    </div>
+                    <div class="kpi-mini-card">
+                      <div class="kpi-mini-label">Stretch Limit (≤40%)</div>
+                      <div id="tkAfStretchEmi" class="kpi-mini-val" style="color:var(--brand-amber);">—</div>
+                    </div>
+                    <div class="kpi-mini-card">
+                      <div class="kpi-mini-label">Max Comfortable Loan</div>
+                      <div id="tkAfMaxLoan" class="kpi-mini-val" style="color:var(--brand-blue-dark);">—</div>
+                    </div>
+                  </div>
+                  <div id="tkAfAdvice" class="official-callout" style="margin-top:0;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. Side-by-side scenario comparison -->
+            <div class="tool-section tk-noprint" id="tk-compare">
+              <h2 class="tool-title">⚖️ Compare Loan Scenarios</h2>
+              <p class="tool-desc">Try up to three "what-if" loans side by side. The best value in each row is highlighted.</p>
+              <div class="tool-grid cols-3">
+                <div class="scenario-card">
+                  <h3>Scenario A</h3>
+                  <div class="mini-field"><label for="tkScA_P">Loan amount (₹)</label><input type="number" id="tkScA_P" class="input-number" value="5000000" min="0" step="50000" /></div>
+                  <div class="mini-field"><label for="tkScA_R">Interest rate (% p.a.)</label><input type="number" id="tkScA_R" class="input-number" value="8.5" min="0" step="0.05" /></div>
+                  <div class="mini-field"><label for="tkScA_T">Tenure (years)</label><input type="number" id="tkScA_T" class="input-number" value="20" min="1" step="0.5" /></div>
+                </div>
+                <div class="scenario-card">
+                  <h3>Scenario B</h3>
+                  <div class="mini-field"><label for="tkScB_P">Loan amount (₹)</label><input type="number" id="tkScB_P" class="input-number" value="5000000" min="0" step="50000" /></div>
+                  <div class="mini-field"><label for="tkScB_R">Interest rate (% p.a.)</label><input type="number" id="tkScB_R" class="input-number" value="8.5" min="0" step="0.05" /></div>
+                  <div class="mini-field"><label for="tkScB_T">Tenure (years)</label><input type="number" id="tkScB_T" class="input-number" value="15" min="1" step="0.5" /></div>
+                </div>
+                <div class="scenario-card">
+                  <h3>Scenario C</h3>
+                  <div class="mini-field"><label for="tkScC_P">Loan amount (₹)</label><input type="number" id="tkScC_P" class="input-number" value="4000000" min="0" step="50000" /></div>
+                  <div class="mini-field"><label for="tkScC_R">Interest rate (% p.a.)</label><input type="number" id="tkScC_R" class="input-number" value="8" min="0" step="0.05" /></div>
+                  <div class="mini-field"><label for="tkScC_T">Tenure (years)</label><input type="number" id="tkScC_T" class="input-number" value="20" min="1" step="0.5" /></div>
+                </div>
+              </div>
+              <div class="btn-row" style="margin:12px 0 0 0;">
+                <button type="button" id="tkScUseCurrent" class="btn-secondary">⬆ Use my current loan as Scenario A</button>
+              </div>
+              <div class="table-scroll-box">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Metric</th>
+                      <th class="num">Scenario A</th>
+                      <th class="num">Scenario B</th>
+                      <th class="num">Scenario C</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tkScBody"></tbody>
+                </table>
+              </div>
+              <p id="tkScSummary" class="tool-desc" style="margin:12px 0 0 0;" aria-live="polite"></p>
+            </div>
+
+            <!-- 5. Lender comparison -->
+            <div class="tool-section tk-noprint" id="tk-lenders">
+              <h2 class="tool-title">🏦 Compare Lenders</h2>
+              <p class="tool-desc">Type the interest rate and processing fee each bank or NBFC quoted you. The loan amount and tenure come from the calculator above. The names and numbers below are only samples, so replace them with your real offers. Totals exclude GST on fees and any other charges.</p>
+              <div class="lender-grid">
+                <div><label for="tkLnd1Name">Lender 1</label><input type="text" id="tkLnd1Name" class="input-number" value="Bank A" maxlength="30" /></div>
+                <div><label for="tkLnd1Rate">Rate (% p.a.)</label><input type="number" id="tkLnd1Rate" class="input-number" value="8.5" min="0" step="0.05" /></div>
+                <div><label for="tkLnd1Fee">Processing fee (%)</label><input type="number" id="tkLnd1Fee" class="input-number" value="0.5" min="0" step="0.05" /></div>
+              </div>
+              <div class="lender-grid">
+                <div><label for="tkLnd2Name">Lender 2</label><input type="text" id="tkLnd2Name" class="input-number" value="Bank B" maxlength="30" /></div>
+                <div><label for="tkLnd2Rate">Rate (% p.a.)</label><input type="number" id="tkLnd2Rate" class="input-number" value="8.75" min="0" step="0.05" /></div>
+                <div><label for="tkLnd2Fee">Processing fee (%)</label><input type="number" id="tkLnd2Fee" class="input-number" value="0.25" min="0" step="0.05" /></div>
+              </div>
+              <div class="lender-grid">
+                <div><label for="tkLnd3Name">Lender 3</label><input type="text" id="tkLnd3Name" class="input-number" value="NBFC C" maxlength="30" /></div>
+                <div><label for="tkLnd3Rate">Rate (% p.a.)</label><input type="number" id="tkLnd3Rate" class="input-number" value="9.25" min="0" step="0.05" /></div>
+                <div><label for="tkLnd3Fee">Processing fee (%)</label><input type="number" id="tkLnd3Fee" class="input-number" value="1" min="0" step="0.05" /></div>
+              </div>
+              <div class="table-scroll-box">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Lender</th>
+                      <th class="num">Rate</th>
+                      <th class="num">Processing Fee</th>
+                      <th class="num">Monthly EMI</th>
+                      <th class="num">Total Interest</th>
+                      <th class="num">Total Cost (Interest + Fee)</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tkLndBody"></tbody>
+                </table>
+              </div>
+              <p id="tkLndSummary" class="tool-desc" style="margin:12px 0 0 0;" aria-live="polite"></p>
+            </div>
+
+            <!-- 6. Saved plans -->
+            <div class="tool-section tk-noprint" id="tk-saved">
+              <h2 class="tool-title">⭐ Saved Loan Plans</h2>
+              <p class="tool-desc">Save the current calculator settings, compare saved plans side by side, and come back to them later. Plans are stored only in this browser on your device and are never sent anywhere.</p>
+              <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:flex-end;">
+                <div style="flex:1 1 220px;">
+                  <label for="tkSaveName" style="display:block; font-size:0.78rem; margin-bottom:3px;">Plan name (optional)</label>
+                  <input type="text" id="tkSaveName" class="input-number" placeholder="e.g. Bank A, 20 years" maxlength="40" />
+                </div>
+                <button type="button" id="tkSaveBtn" class="btn-primary">⭐ Save Current Plan</button>
+                <button type="button" id="tkClearSavedBtn" class="btn-secondary">Clear All</button>
+              </div>
+              <div class="table-scroll-box">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Plan</th>
+                      <th class="num">Loan</th>
+                      <th class="num">Rate</th>
+                      <th class="num">Tenure</th>
+                      <th class="num">EMI</th>
+                      <th class="num">Total Interest</th>
+                      <th class="num">Total Repayment</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tkSavedBody"></tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
         </section>
 
         <!-- ==================================================================
@@ -1185,6 +1642,9 @@
               <span class="calc-badge">Calculator 2 • Mutual Fund Compounding</span>
               <h2 id="title-sip" class="calc-title">SIP Calculator (Mutual Fund Future Value)</h2>
               <p class="calc-desc">Formula: FV = P × [((1 + i)^n − 1) / i] × (1 + i). Estimate your total wealth corpus from systematic monthly investing.</p>
+            </div>
+            <div>
+              <button type="button" class="btn-secondary" onclick="window.print()">🖨️ Print / Save PDF</button>
             </div>
           </div>
 
@@ -1275,6 +1735,9 @@
               <h2 id="title-gst" class="calc-title">GST Calculator (Add or Remove GST + Custom Rate)</h2>
               <p class="calc-desc">Add GST to a base amount or remove GST from an inclusive invoice, with custom rate input and CGST/SGST vs. IGST split.</p>
             </div>
+            <div>
+              <button type="button" class="btn-secondary" onclick="window.print()">🖨️ Print / Save PDF</button>
+            </div>
           </div>
 
           <div class="calc-workspace-grid">
@@ -1364,6 +1827,9 @@
               <span class="calc-badge">Calculator 4 • CBDT New vs. Old Regime</span>
               <h2 id="title-tax" class="calc-title">Indian Income Tax Calculator (New vs. Old Regime)</h2>
               <p class="calc-desc">Side-by-side comparison incorporating the ₹75,000 Standard Deduction and Section 87A rebate under the New Tax Regime vs. Old Regime deductions.</p>
+            </div>
+            <div>
+              <button type="button" class="btn-secondary" onclick="window.print()">🖨️ Print / Save PDF</button>
             </div>
           </div>
 
@@ -1484,6 +1950,9 @@
               <h2 id="title-age" class="calc-title">Exact Age Calculator &amp; Next Birthday Countdown</h2>
               <p class="calc-desc">Compute your exact age in years, months, and days, total hours lived, and exact months and days until your next birthday.</p>
             </div>
+            <div>
+              <button type="button" class="btn-secondary" onclick="window.print()">🖨️ Print / Save PDF</button>
+            </div>
           </div>
 
           <div class="calc-workspace-grid">
@@ -1546,6 +2015,9 @@
               <span class="calc-badge">Calculator 6 • 3-in-1 Everyday Percentage Suite</span>
               <h2 id="title-pct" class="calc-title">Percentage Calculator (3-in-1 Utility)</h2>
               <p class="calc-desc">Solve all three percentage questions simultaneously: X% of Y, X is what % of Y, and Percentage Increase/Decrease from A to B.</p>
+            </div>
+            <div>
+              <button type="button" class="btn-secondary" onclick="window.print()">🖨️ Print / Save PDF</button>
             </div>
           </div>
 
@@ -1625,6 +2097,9 @@
               <h2 id="title-datediff" class="calc-title">Date Difference Calculator</h2>
               <p class="calc-desc">Find exact years, months, and days between two dates, plus total calendar days, weeks, and working weekdays.</p>
             </div>
+            <div>
+              <button type="button" class="btn-secondary" onclick="window.print()">🖨️ Print / Save PDF</button>
+            </div>
           </div>
 
           <div class="calc-workspace-grid">
@@ -1687,6 +2162,9 @@
               <span class="calc-badge">Calculator 8 • Indian Ministry of Health / ICMR Cut-Offs</span>
               <h2 id="title-bmi" class="calc-title">BMI Calculator (Indian Asian-Indian vs. WHO Cut-Offs)</h2>
               <p class="calc-desc">Calculate your Body Mass Index with toggleable cm or Feet+Inches height and compare against stricter Indian metabolic guidelines.</p>
+            </div>
+            <div>
+              <button type="button" class="btn-secondary" onclick="window.print()">🖨️ Print / Save PDF</button>
             </div>
           </div>
 
@@ -2169,6 +2647,15 @@
         }
       }
 
+      // Feed the planner toolkit (chart, prepayment, affordability, comparisons, saved plans)
+      try {
+        if (typeof window.renderEmiToolkit === 'function') {
+          window.renderEmiToolkit({ P: P, annualRate: annualRate, n: n, emi: emi, yearly: yearlyRows });
+        }
+      } catch (err) {
+        console.error('EMI toolkit error:', err);
+      }
+
       const rowsToShow = emiState.scheduleView === 'yearly' ? yearlyRows : monthlyRows;
       document.getElementById('emiSchedPeriodHeader').textContent = emiState.scheduleView === 'yearly' ? 'Year' : 'Month';
       document.getElementById('emiScheduleBody').innerHTML = rowsToShow.map(row => `
@@ -2279,17 +2766,14 @@
       let baseTaxNew = 0;
 
       if (ay === '2026-27') {
-        // Latest FY 2025-26 / AY 2026-27 slabs: 0-4L:0, 4-8L:5%, 8-12L:10%, 12-16L:15%, 16-20L:20%, 20-24L:25%, >24L:30%
         if (taxableNew > 400000) baseTaxNew += Math.min(400000, taxableNew - 400000) * 0.05;
         if (taxableNew > 800000) baseTaxNew += Math.min(400000, taxableNew - 800000) * 0.10;
         if (taxableNew > 1200000) baseTaxNew += Math.min(400000, taxableNew - 1200000) * 0.15;
         if (taxableNew > 1600000) baseTaxNew += Math.min(400000, taxableNew - 1600000) * 0.20;
         if (taxableNew > 2000000) baseTaxNew += Math.min(400000, taxableNew - 2000000) * 0.25;
         if (taxableNew > 2400000) baseTaxNew += (taxableNew - 2400000) * 0.30;
-        // Section 87A Rebate up to ₹12,00,000 taxable income
         if (taxableNew <= 1200000) baseTaxNew = 0;
       } else {
-        // AY 2025-26 slabs: 0-3L:0, 3-7L:5%, 7-10L:10%, 10-12L:15%, 12-15L:20%, >15L:30%
         if (taxableNew > 300000) baseTaxNew += Math.min(400000, taxableNew - 300000) * 0.05;
         if (taxableNew > 700000) baseTaxNew += Math.min(300000, taxableNew - 700000) * 0.10;
         if (taxableNew > 1000000) baseTaxNew += Math.min(200000, taxableNew - 1000000) * 0.15;
@@ -2301,7 +2785,7 @@
       const cessNew = baseTaxNew * 0.04;
       const totalTaxNew = baseTaxNew + cessNew;
 
-      // OLD REGIME CALCULATION (₹50,000 Standard Deduction + 80C + 80D + HRA/24b)
+      // OLD REGIME CALCULATION
       const stdDedOld = 50000;
       const totalDedOld = stdDedOld + ded80C + ded80D + dedHra;
       const taxableOld = Math.max(0, gross - totalDedOld);
@@ -2318,7 +2802,6 @@
       if (taxableOld > 1000000) {
         baseTaxOld += (taxableOld - 1000000) * 0.30;
       }
-      // Sec 87A Rebate in Old Regime up to ₹5,00,000
       if (taxableOld <= 500000) {
         baseTaxOld = 0;
       }
@@ -2394,7 +2877,6 @@
       document.getElementById('ageOutTotalDays').textContent = `${inNumFormatter.format(totalDays)} Days`;
       document.getElementById('ageOutTotalHours').textContent = `${inNumFormatter.format(totalHours)} Hours`;
 
-      // Next Birthday Countdown in exact Months and Days
       let nextBday = new Date(asOf.getFullYear(), dob.getMonth(), dob.getDate());
       if (nextBday < asOf) {
         nextBday = new Date(asOf.getFullYear() + 1, dob.getMonth(), dob.getDate());
@@ -2467,7 +2949,6 @@
       const start = d1 <= d2 ? new Date(d1) : new Date(d2);
       const end = d1 <= d2 ? new Date(d2) : new Date(d1);
 
-      // Compute exact calendar Y-M-D
       const effectiveEnd = new Date(end);
       if (includeEnd) {
         effectiveEnd.setDate(effectiveEnd.getDate() + 1);
@@ -2493,7 +2974,6 @@
       const weeks = Math.floor(totalDays / 7);
       const remDays = totalDays % 7;
 
-      // Count working weekdays vs weekends
       let weekdaysCount = 0;
       let weekendsCount = 0;
       const runner = new Date(start);
@@ -2538,7 +3018,6 @@
       const heightM = heightCm / 100;
       const bmi = weight / (heightM * heightM);
 
-      // Indian Ministry of Health / Asian-Indian Cut-offs: <18.0 Underweight, 18.0-22.9 Normal, 23.0-24.9 Overweight, >=25.0 Obese
       let indianStatus = 'Normal / Healthy Weight';
       let indianColor = 'var(--brand-emerald)';
       if (bmi < 18.0) {
@@ -2555,7 +3034,6 @@
         indianColor = 'var(--brand-rose)';
       }
 
-      // Standard WHO Cut-offs: <18.5 Underweight, 18.5-24.9 Normal, 25.0-29.9 Overweight, >=30.0 Obese
       let whoStatus = 'Normal Weight (18.5–24.9)';
       if (bmi < 18.5) whoStatus = 'Underweight (<18.5)';
       else if (bmi < 25.0) whoStatus = 'Normal Weight (18.5–24.9)';
@@ -2587,18 +3065,15 @@
     // INITIALIZE ALL EVENT LISTENERS ON DOMCONTENTLOADED
     // ========================================================================
     window.addEventListener('DOMContentLoaded', () => {
-      // Default Age As-Of Date to today if needed
       const todayIso = new Date().toISOString().slice(0, 10);
       const ageAsOfEl = document.getElementById('ageAsOf');
       if (ageAsOfEl && !ageAsOfEl.value) {
         ageAsOfEl.value = todayIso;
       }
 
-      // Language Toggle Buttons
       document.getElementById('btnLangEn').addEventListener('click', () => setLanguage('en'));
       document.getElementById('btnLangHi').addEventListener('click', () => setLanguage('hi'));
 
-      // Accessibility Toggles
       document.getElementById('a11yLargeTextBtn').addEventListener('click', () => {
         document.body.classList.toggle('large-text-mode');
         showToast('Toggled Large Text Accessibility Mode');
@@ -2608,14 +3083,12 @@
         showToast('Toggled High-Contrast Border Mode');
       });
 
-      // Top Calculator Tab Bar
       document.querySelectorAll('.calc-tab-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           switchCalculatorTab(btn.dataset.tab);
         });
       });
 
-      // Sidebar Quick Calculator Directory Links
       document.querySelectorAll('.dir-jump-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           switchCalculatorTab(btn.dataset.jump);
@@ -2688,10 +3161,6 @@
         document.getElementById('emiSchedMonthlyBtn').classList.add('active');
         document.getElementById('emiSchedYearlyBtn').classList.remove('active');
         computeEMI();
-      });
-
-      document.getElementById('emiPrintBtn').addEventListener('click', () => {
-        window.print();
       });
 
       // 2. SIP Form Listeners
@@ -2827,6 +3296,551 @@
       computeDateDiff();
       computeBMI();
     });
+  </script>
+
+  <!-- ========================================================================
+       EMI PLANNER TOOLKIT LOGIC (chart, insights, prepayment, affordability,
+       scenario + lender comparison, saved plans). Runs fully in the browser.
+       ======================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      const $ = id => document.getElementById(id);
+      let last = null; // { P, annualRate, n, emi, yearly } from computeEMI()
+
+      /* ---------- helpers ---------- */
+      function num(id, fallback) {
+        const el = $(id);
+        const v = el ? parseFloat(el.value) : NaN;
+        return Number.isFinite(v) ? v : fallback;
+      }
+
+      function esc(s) {
+        return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+      }
+
+      function compact(v) {
+        const a = Math.abs(v);
+        if (a >= 1e7) return '₹' + Number((v / 1e7).toFixed(2)) + ' Cr';
+        if (a >= 1e5) return '₹' + Number((v / 1e5).toFixed(2)) + ' L';
+        if (a >= 1e3) return '₹' + Number((v / 1e3).toFixed(1)) + 'K';
+        return '₹' + Math.round(v);
+      }
+
+      function axisLabel(v) {
+        const a = Math.abs(v);
+        if (a >= 1e7) return '₹' + Number((v / 1e7).toFixed(1)) + 'Cr';
+        if (a >= 1e5) return '₹' + Number((v / 1e5).toFixed(1)) + 'L';
+        if (a >= 1e3) return '₹' + Math.round(v / 1e3) + 'K';
+        return '₹' + Math.round(v);
+      }
+
+      function termText(months) {
+        const y = Math.floor(months / 12);
+        const m = months % 12;
+        const parts = [];
+        if (y) parts.push(y + (y === 1 ? ' yr' : ' yrs'));
+        if (m || !y) parts.push(m + (m === 1 ? ' mo' : ' mos'));
+        return parts.join(' ');
+      }
+
+      function calcEmi(P, annualRate, n) {
+        if (!(n > 0)) return 0;
+        const r = annualRate / 12 / 100;
+        if (r === 0) return P / n;
+        const f = Math.pow(1 + r, n);
+        return (P * r * f) / (f - 1);
+      }
+
+      // Month-by-month loan simulation with an optional extra monthly payment and one lump-sum prepayment.
+      function simulate(P, annualRate, emi, extra, lump, lumpMonth) {
+        const r = annualRate / 12 / 100;
+        let bal = P, months = 0, interestTotal = 0;
+        while (bal > 0.5 && months < 1200) {
+          months++;
+          const interest = bal * r;
+          let principal = emi + extra - interest;
+          if (principal <= 0) return null;
+          if (principal > bal) principal = bal;
+          interestTotal += interest;
+          bal -= principal;
+          if (lump > 0 && months === lumpMonth && bal > 0) bal = Math.max(0, bal - lump);
+        }
+        return { months: months, interest: interestTotal };
+      }
+
+      // Outstanding balance and interest paid after a number of regular EMIs (no prepayment).
+      function stateAfter(P, annualRate, emi, months) {
+        const r = annualRate / 12 / 100;
+        let bal = P, paid = 0;
+        for (let m = 1; m <= months && bal > 0.5; m++) {
+          const interest = bal * r;
+          let principal = emi - interest;
+          if (principal > bal) principal = bal;
+          paid += interest;
+          bal -= principal;
+        }
+        return { balance: Math.max(0, bal), interestPaid: paid };
+      }
+
+      function safe(fn) {
+        try { fn(); } catch (err) { console.error('EMI toolkit:', err); }
+      }
+
+      /* ---------- 1. Chart ---------- */
+      function renderChart() {
+        const svg = $('tkYearChart');
+        if (!svg || !last || !last.yearly.length) return;
+        const rows = last.yearly;
+        const W = 680, H = 280, L = 62, R = 62, T = 24, B = 38;
+        const iw = W - L - R, ih = H - T - B;
+        const base = T + ih;
+        const maxPay = Math.max(1, ...rows.map(r => r.principal + r.interest));
+        const slot = iw / rows.length;
+        const bw = Math.max(3, Math.min(34, slot * 0.72));
+        let out = '';
+
+        out += `<text x="${L}" y="12" font-size="11" font-weight="800" fill="#334155">Paid per year</text>`;
+        out += `<text x="${W - R}" y="12" text-anchor="end" font-size="11" font-weight="800" fill="#047857">Balance left</text>`;
+
+        for (let i = 0; i <= 4; i++) {
+          const y = base - (ih * i) / 4;
+          out += `<line x1="${L}" y1="${y.toFixed(1)}" x2="${W - R}" y2="${y.toFixed(1)}" stroke="#cbd5e1" stroke-width="1"/>`;
+          out += `<text x="${L - 6}" y="${(y + 4).toFixed(1)}" text-anchor="end" font-size="11" font-weight="700" fill="#334155">${axisLabel((maxPay * i) / 4)}</text>`;
+          out += `<text x="${W - R + 6}" y="${(y + 4).toFixed(1)}" text-anchor="start" font-size="11" font-weight="700" fill="#047857">${axisLabel((last.P * i) / 4)}</text>`;
+        }
+
+        const step = Math.max(1, Math.ceil(rows.length / 15));
+        rows.forEach((row, i) => {
+          const x = L + slot * i + (slot - bw) / 2;
+          const hp = (ih * row.principal) / maxPay;
+          const hi = (ih * row.interest) / maxPay;
+          out += `<rect x="${x.toFixed(1)}" y="${(base - hp).toFixed(1)}" width="${bw.toFixed(1)}" height="${hp.toFixed(1)}" fill="#1d4ed8"><title>Year ${i + 1} principal: ${esc(formatINR(row.principal))}</title></rect>`;
+          out += `<rect x="${x.toFixed(1)}" y="${(base - hp - hi).toFixed(1)}" width="${bw.toFixed(1)}" height="${hi.toFixed(1)}" fill="#d97706"><title>Year ${i + 1} interest: ${esc(formatINR(row.interest))}</title></rect>`;
+          if (i % step === 0) {
+            out += `<text x="${(x + bw / 2).toFixed(1)}" y="${base + 16}" text-anchor="middle" font-size="11" font-weight="700" fill="#334155">${i + 1}</text>`;
+          }
+        });
+        out += `<text x="${(L + iw / 2).toFixed(1)}" y="${H - 4}" text-anchor="middle" font-size="11" font-weight="800" fill="#334155">Loan year</text>`;
+
+        const pts = [[L, T]];
+        rows.forEach((row, i) => {
+          pts.push([L + slot * (i + 1), T + ih - (ih * Math.max(0, row.closing)) / last.P]);
+        });
+        out += `<polyline points="${pts.map(p => p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' ')}" fill="none" stroke="#047857" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>`;
+        if (rows.length <= 31) {
+          pts.slice(1).forEach((p, i) => {
+            out += `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="3" fill="#047857"><title>End of year ${i + 1} balance: ${esc(formatINR(rows[i].closing))}</title></circle>`;
+          });
+        }
+        svg.innerHTML = out;
+      }
+
+      /* ---------- 1b. Smart insights ---------- */
+      function renderInsights() {
+        const ul = $('tkInsights');
+        if (!ul || !last) return;
+        const P = last.P, rate = last.annualRate, n = last.n, emi = last.emi;
+        const r = rate / 12 / 100;
+        const items = [];
+
+        const totalPay = emi * n;
+        const interestShare = totalPay > 0 ? ((totalPay - P) / totalPay) * 100 : 0;
+        items.push(`You will repay ${formatINR(totalPay)} in total, and ${interestShare.toFixed(0)}% of that is interest.`);
+
+        let bal = P, cross = null;
+        for (let m = 1; m <= n && bal > 0.5; m++) {
+          const interest = bal * r;
+          const principal = emi - interest;
+          if (principal > interest) { cross = m; break; }
+          bal -= principal;
+        }
+        if (cross === 1) {
+          items.push('From your very first EMI, more goes toward principal than interest.');
+        } else if (cross) {
+          items.push(`Early EMIs are mostly interest. From EMI ${cross} (year ${Math.ceil(cross / 12)}) onward, more of each EMI goes toward principal than interest.`);
+        }
+
+        if (n > 24) {
+          const n2 = n - 12;
+          const e2 = calcEmi(P, rate, n2);
+          const saved = emi * n - e2 * n2;
+          items.push(`Shorten the tenure by 1 year (to ${termText(n2)}): your EMI rises by ${formatINR(e2 - emi)} to ${formatINR(e2)}, and you save about ${formatINR(saved)} in interest.`);
+        }
+
+        const delta = P >= 1000000 ? 100000 : Math.max(10000, Math.round((P * 0.1) / 10000) * 10000);
+        if (P > delta * 1.5) {
+          const e1 = calcEmi(P - delta, rate, n);
+          const saved1 = (emi - e1) * n - delta;
+          items.push(`Borrowing ${formatINR(delta)} less (or paying that much more as down payment) lowers your EMI by ${formatINR(emi - e1)} and saves about ${formatINR(saved1)} in interest.`);
+        }
+
+        const extra = Math.max(500, Math.round((emi * 0.1) / 500) * 500);
+        const baseSim = simulate(P, rate, emi, 0, 0, 0);
+        const extraSim = simulate(P, rate, emi, extra, 0, 0);
+        if (baseSim && extraSim && baseSim.months > extraSim.months) {
+          items.push(`Pay an extra ${formatINR(extra)} each month and the loan ends ${termText(baseSim.months - extraSim.months)} sooner, saving about ${formatINR(baseSim.interest - extraSim.interest)} in interest.`);
+        }
+
+        if (rate > 1) {
+          const e3 = calcEmi(P, rate - 0.5, n);
+          items.push(`A rate just 0.5% lower (${(rate - 0.5).toFixed(2)}%) would cut your EMI by ${formatINR(emi - e3)} and total interest by about ${formatINR((emi - e3) * n)}. It is worth negotiating or comparing lenders.`);
+        }
+
+        const income = num('tkIncome', 0);
+        if (income > 0) {
+          const pct = (emi / income) * 100;
+          const verdict = pct <= 30 ? 'within a comfortable range' : (pct <= 40 ? 'manageable but tight' : 'on the high-risk side');
+          items.push(`This EMI is ${pct.toFixed(1)}% of your monthly income, which is ${verdict}.`);
+        }
+
+        ul.innerHTML = items.map(t => `<li>💡 ${esc(t)}</li>`).join('');
+      }
+
+      /* ---------- 2. Prepayment planner ---------- */
+      function renderPrepay() {
+        if (!last) return;
+        const P = last.P, rate = last.annualRate, n = last.n, emi = last.emi;
+        const extra = Math.max(0, num('tkExtraMonthly', 0));
+        const lump = Math.max(0, num('tkLumpAmount', 0));
+        const lumpMonth = Math.min(n, Math.max(1, Math.round(num('tkLumpMonth', 1))));
+        const closeMonth = Math.min(n, Math.max(1, Math.round(num('tkCloseMonth', 1))));
+
+        const baseSim = simulate(P, rate, emi, 0, 0, 0);
+        const altSim = simulate(P, rate, emi, extra, lump, lumpMonth);
+        if (!baseSim || !altSim) return;
+
+        const active = extra > 0 || lump > 0;
+        const saved = Math.max(0, baseSim.interest - altSim.interest);
+        const monthsSaved = Math.max(0, baseSim.months - altSim.months);
+
+        $('tkPpSaved').textContent = formatINR(saved);
+        const bits = [];
+        if (extra > 0) bits.push(formatINR(extra) + ' extra every month');
+        if (lump > 0) bits.push(formatINR(lump) + ' lump sum after EMI ' + lumpMonth);
+        $('tkPpSavedSub').textContent = active ? 'By paying ' + bits.join(' + ') : 'Enter an extra amount or a lump sum.';
+        $('tkPpTimeSaved').textContent = active ? termText(monthsSaved) : '—';
+        $('tkPpNewTerm').textContent = termText(altSim.months);
+        $('tkPpOldInterest').textContent = formatINR(baseSim.interest);
+        $('tkPpNewInterest').textContent = formatINR(altSim.interest);
+
+        let note = 'Add an extra monthly payment or a lump sum to see how much sooner the loan closes.';
+        if (active) {
+          note = 'Your EMI stays at ' + formatINR(emi) + ' and the loan closes sooner.';
+          if (lump > 0) {
+            const st = stateAfter(P, rate, emi, lumpMonth);
+            const remaining = n - lumpMonth;
+            if (lump >= st.balance - 0.5) {
+              note = 'Your lump sum is large enough to clear the whole loan at that point.';
+            } else if (remaining > 0) {
+              const e2 = calcEmi(st.balance - lump, rate, remaining);
+              note += ' If you instead use the lump sum to lower your EMI and keep the same tenure, your EMI would fall to ' + formatINR(e2) + ' (' + formatINR(emi - e2) + ' less per month).';
+            }
+          }
+        }
+        $('tkPpEmiNote').textContent = note;
+
+        const st2 = stateAfter(P, rate, emi, closeMonth);
+        $('tkCloseMonthLabel').textContent = closeMonth;
+        $('tkCloseBalance').textContent = formatINR(st2.balance);
+        $('tkCloseSaved').textContent = formatINR(Math.max(0, baseSim.interest - st2.interestPaid));
+      }
+
+      /* ---------- 3. Affordability ---------- */
+      function renderAfford() {
+        if (!last) return;
+        const income = num('tkIncome', 0);
+        const other = Math.max(0, num('tkOtherEmi', 0));
+        const emi = last.emi, rate = last.annualRate, n = last.n;
+        const marker = $('tkAfMarker');
+
+        if (!(income > 0)) {
+          $('tkAfPct').textContent = '—';
+          $('tkAfLabel').textContent = 'Enter your monthly income to see your comfort level.';
+          ['tkAfLoanPct', 'tkAfSafeEmi', 'tkAfStretchEmi', 'tkAfMaxLoan'].forEach(id => { $(id).textContent = '—'; });
+          $('tkAfAdvice').textContent = '';
+          marker.style.left = '0%';
+          return;
+        }
+
+        const loanPct = (emi / income) * 100;
+        const totalPct = ((emi + other) / income) * 100;
+        const safeEmi = Math.max(0, income * 0.30 - other);
+        const stretchEmi = Math.max(0, income * 0.40 - other);
+        const rm = rate / 12 / 100;
+        const f = Math.pow(1 + rm, n);
+        const maxLoan = rm === 0 ? safeEmi * n : (safeEmi * (f - 1)) / (rm * f);
+
+        let status, advice;
+        if (totalPct <= 30) {
+          status = '✅ Comfortable';
+          advice = 'This loan fits comfortably within your income and leaves room for savings and emergencies.';
+        } else if (totalPct <= 40) {
+          status = '⚠️ Moderate / tight';
+          advice = 'Manageable, but tight. An unexpected expense or income dip could strain your budget. Consider a longer tenure, a bigger down payment or a smaller loan.';
+        } else {
+          status = '🚨 High risk';
+          advice = 'This is a heavy burden on your income. Consider a smaller loan, a bigger down payment or a longer tenure, and keep an emergency fund.';
+        }
+        if (other > 0) advice += ' Your other EMIs of ' + formatINR(other) + ' a month are included in this check.';
+
+        $('tkAfPct').textContent = totalPct.toFixed(1) + '% of income';
+        $('tkAfLabel').textContent = status + '. Total EMIs: ' + formatINR(emi + other) + ' of ' + formatINR(income) + ' a month.';
+        $('tkAfLoanPct').textContent = loanPct.toFixed(1) + '%';
+        $('tkAfSafeEmi').textContent = formatINR(safeEmi);
+        $('tkAfStretchEmi').textContent = formatINR(stretchEmi);
+        $('tkAfMaxLoan').textContent = compact(maxLoan);
+        $('tkAfAdvice').textContent = advice + ' At your current rate and tenure, keeping total EMIs at 30% of income supports a loan of about ' + formatINR(maxLoan) + '.';
+        marker.style.left = (Math.min(totalPct, 60) / 60 * 100) + '%';
+      }
+
+      /* ---------- 4. Scenario comparison ---------- */
+      function bestOf(valid, key) {
+        if (valid.length < 2) return null;
+        const vals = valid.map(s => s[key]);
+        const lo = Math.min(...vals), hi = Math.max(...vals);
+        return hi - lo > 1e-6 ? lo : null;
+      }
+
+      function renderScenarios() {
+        const body = $('tkScBody');
+        if (!body) return;
+        const income = num('tkIncome', 0);
+        const sc = ['A', 'B', 'C'].map(k => {
+          const P = Math.max(0, num('tkSc' + k + '_P', 0));
+          const R = Math.max(0, num('tkSc' + k + '_R', 0));
+          const T = Math.max(0, num('tkSc' + k + '_T', 0));
+          const n = Math.round(T * 12);
+          if (!(P > 0 && n > 0)) return null;
+          const emi = calcEmi(P, R, n);
+          return { k: k, P: P, R: R, n: n, emi: emi, total: emi * n, interest: emi * n - P, pct: income > 0 ? (emi / income) * 100 : 0 };
+        });
+        const valid = sc.filter(Boolean);
+
+        const rows = [
+          { label: 'Loan amount', val: s => formatINR(s.P) },
+          { label: 'Interest rate', val: s => s.R + '% p.a.' },
+          { label: 'Tenure', val: s => termText(s.n), key: 'n', tag: 'Shortest' },
+          { label: 'Monthly EMI', val: s => formatINR(s.emi), key: 'emi', tag: 'Lowest' },
+          { label: 'Total interest', val: s => formatINR(s.interest), key: 'interest', tag: 'Lowest' },
+          { label: 'Total repayment', val: s => formatINR(s.total), key: 'total', tag: 'Lowest' }
+        ];
+        if (income > 0) rows.push({ label: 'EMI as % of income', val: s => s.pct.toFixed(1) + '%', key: 'pct', tag: 'Lowest' });
+
+        body.innerHTML = rows.map(row => {
+          const best = row.key ? bestOf(valid, row.key) : null;
+          const cells = sc.map(s => {
+            if (!s) return '<td class="num">—</td>';
+            const isBest = best !== null && Math.abs(s[row.key] - best) <= 1e-6;
+            return `<td class="num${isBest ? ' best-cell' : ''}">${esc(row.val(s))}${isBest ? ' <span class="best-tag">' + row.tag + '</span>' : ''}</td>`;
+          }).join('');
+          return `<tr><td>${row.label}</td>${cells}</tr>`;
+        }).join('');
+
+        const names = (key) => {
+          const lo = bestOf(valid, key);
+          if (lo === null) return null;
+          return valid.filter(s => Math.abs(s[key] - lo) <= 1e-6).map(s => s.k).join(' & ');
+        };
+        const bits = [];
+        const e = names('emi'), i = names('interest'), t = names('n');
+        if (e) bits.push('Lowest EMI: Scenario ' + e);
+        if (i) bits.push('Lowest total interest: Scenario ' + i);
+        if (t) bits.push('Shortest tenure: Scenario ' + t);
+        $('tkScSummary').textContent = bits.join('  ·  ');
+      }
+
+      /* ---------- 5. Lender comparison ---------- */
+      function renderLenders() {
+        const body = $('tkLndBody');
+        if (!body || !last) return;
+        const P = last.P, n = last.n;
+        const lenders = [1, 2, 3].map(i => {
+          const nameEl = $('tkLnd' + i + 'Name');
+          const name = ((nameEl && nameEl.value) || '').trim() || 'Lender ' + i;
+          const R = Math.max(0, num('tkLnd' + i + 'Rate', 0));
+          const fee = Math.max(0, num('tkLnd' + i + 'Fee', 0));
+          const emi = calcEmi(P, R, n);
+          const interest = emi * n - P;
+          const feeAmt = (P * fee) / 100;
+          return { name: name, R: R, fee: fee, emi: emi, interest: interest, feeAmt: feeAmt, cost: interest + feeAmt };
+        });
+
+        const bestEmi = bestOf(lenders, 'emi');
+        const bestInt = bestOf(lenders, 'interest');
+        const bestCost = bestOf(lenders, 'cost');
+        const mark = (v, best) => best !== null && Math.abs(v - best) <= 1e-6;
+
+        body.innerHTML = lenders.map(l => `
+          <tr>
+            <td>${esc(l.name)}</td>
+            <td class="num">${l.R}%</td>
+            <td class="num">${esc(formatINR(l.feeAmt))} <span style="font-weight:600;">(${l.fee}%)</span></td>
+            <td class="num${mark(l.emi, bestEmi) ? ' best-cell' : ''}">${esc(formatINR(l.emi))}${mark(l.emi, bestEmi) ? ' <span class="best-tag">Lowest EMI</span>' : ''}</td>
+            <td class="num${mark(l.interest, bestInt) ? ' best-cell' : ''}">${esc(formatINR(l.interest))}${mark(l.interest, bestInt) ? ' <span class="best-tag">Lowest</span>' : ''}</td>
+            <td class="num${mark(l.cost, bestCost) ? ' best-cell' : ''}">${esc(formatINR(l.cost))}${mark(l.cost, bestCost) ? ' <span class="best-tag">Best total</span>' : ''}</td>
+          </tr>`).join('');
+
+        const bits = [];
+        const pick = (key, best) => lenders.filter(l => mark(l[key], best)).map(l => l.name).join(' & ');
+        if (bestEmi !== null) bits.push('Lowest EMI: ' + pick('emi', bestEmi));
+        if (bestCost !== null) bits.push('Lowest total cost: ' + pick('cost', bestCost));
+        $('tkLndSummary').textContent = bits.join('  ·  ') + (bits.length ? '  ·  Same tenure for all: ' + termText(n) : '');
+      }
+
+      /* ---------- 6. Saved plans (localStorage, this browser only) ---------- */
+      const SAVE_KEY = 'neiharEmiSavedPlans_v1';
+
+      function getSaved() {
+        try {
+          const raw = JSON.parse(localStorage.getItem(SAVE_KEY) || '[]');
+          if (!Array.isArray(raw)) return [];
+          return raw.filter(p => p && Number.isFinite(p.P) && p.P > 0 && Number.isFinite(p.rate) && p.rate >= 0 && Number.isFinite(p.n) && p.n >= 1);
+        } catch (err) {
+          return [];
+        }
+      }
+
+      function putSaved(list) {
+        try {
+          localStorage.setItem(SAVE_KEY, JSON.stringify(list));
+          return true;
+        } catch (err) {
+          return false;
+        }
+      }
+
+      function renderSaved() {
+        const body = $('tkSavedBody');
+        if (!body) return;
+        const list = getSaved().map(p => {
+          const emi = calcEmi(p.P, p.rate, p.n);
+          return Object.assign({}, p, { emi: emi, total: emi * p.n, interest: emi * p.n - p.P });
+        });
+        if (!list.length) {
+          body.innerHTML = '<tr><td colspan="8">No saved plans yet. Set up a loan above, then press “Save Current Plan”.</td></tr>';
+          return;
+        }
+        const bestEmi = bestOf(list, 'emi');
+        const bestInt = bestOf(list, 'interest');
+        const mark = (v, best) => best !== null && Math.abs(v - best) <= 1e-6;
+        body.innerHTML = list.map(p => `
+          <tr>
+            <td>${esc(p.name || 'Saved plan')}</td>
+            <td class="num">${esc(formatINR(p.P))}</td>
+            <td class="num">${p.rate}%</td>
+            <td class="num">${termText(p.n)}</td>
+            <td class="num${mark(p.emi, bestEmi) ? ' best-cell' : ''}">${esc(formatINR(p.emi))}</td>
+            <td class="num${mark(p.interest, bestInt) ? ' best-cell' : ''}">${esc(formatINR(p.interest))}</td>
+            <td class="num">${esc(formatINR(p.total))}</td>
+            <td class="saved-actions">
+              <button type="button" data-action="load" data-id="${esc(p.id)}">Load</button>
+              <button type="button" data-action="delete" data-id="${esc(p.id)}">Delete</button>
+            </td>
+          </tr>`).join('');
+      }
+
+      function loadPlanIntoCalculator(plan) {
+        const asYears = plan.n % 12 === 0 && plan.n / 12 <= 30;
+        emiState.tenureUnit = asYears ? 'years' : 'months';
+        $('emiUnitYearsBtn').classList.toggle('active', asYears);
+        $('emiUnitMonthsBtn').classList.toggle('active', !asYears);
+        const tenureVal = asYears ? plan.n / 12 : plan.n;
+        const slider = $('emiTenureSlider');
+        slider.max = asYears ? 30 : 360;
+        slider.value = tenureVal;
+        $('emiTenure').value = tenureVal;
+        $('emiPrincipal').value = plan.P;
+        $('emiPrincipalSlider').value = plan.P;
+        $('emiRate').value = plan.rate;
+        $('emiRateSlider').value = plan.rate;
+        document.querySelectorAll('.emi-chip').forEach(c => c.classList.toggle('active', Number(c.dataset.amount) === plan.P));
+        computeEMI();
+        const ws = $('calculators-workspace');
+        if (ws) ws.scrollIntoView({ behavior: 'smooth' });
+        showToast('Plan loaded into the calculator');
+      }
+
+      /* ---------- render everything ---------- */
+      function renderAll(args) {
+        if (args) last = args;
+        if (!last) return;
+        safe(renderChart);
+        safe(renderInsights);
+        safe(renderPrepay);
+        safe(renderAfford);
+        safe(renderScenarios);
+        safe(renderLenders);
+        safe(renderSaved);
+      }
+      window.renderEmiToolkit = renderAll;
+
+      /* ---------- wiring ---------- */
+      function init() {
+        const toolkit = $('emiToolkit');
+        if (!toolkit) return;
+
+        toolkit.addEventListener('input', () => { if (last) renderAll(); });
+
+        $('tkScUseCurrent').addEventListener('click', () => {
+          if (!last) return;
+          $('tkScA_P').value = Math.round(last.P);
+          $('tkScA_R').value = last.annualRate;
+          $('tkScA_T').value = Number((last.n / 12).toFixed(2));
+          renderAll();
+          showToast('Scenario A now matches your current loan');
+        });
+
+        $('tkSaveBtn').addEventListener('click', () => {
+          if (!last) return;
+          const list = getSaved();
+          if (list.length >= 6) {
+            showToast('You can keep up to 6 plans. Delete one first.');
+            return;
+          }
+          const typed = ($('tkSaveName').value || '').trim();
+          const name = (typed || (compact(last.P) + ' @ ' + last.annualRate + '% for ' + termText(last.n))).slice(0, 40);
+          list.push({ id: String(Date.now()), name: name, P: last.P, rate: last.annualRate, n: last.n });
+          if (putSaved(list)) {
+            $('tkSaveName').value = '';
+            showToast('Plan saved in this browser');
+          } else {
+            showToast('Saving is not available in this browser');
+          }
+          renderSaved();
+        });
+
+        $('tkClearSavedBtn').addEventListener('click', () => {
+          if (!getSaved().length) return;
+          if (window.confirm('Delete all saved plans from this browser?')) {
+            putSaved([]);
+            renderSaved();
+            showToast('Saved plans cleared');
+          }
+        });
+
+        $('tkSavedBody').addEventListener('click', e => {
+          const btn = e.target.closest('button[data-action]');
+          if (!btn) return;
+          const id = btn.getAttribute('data-id');
+          const list = getSaved();
+          if (btn.getAttribute('data-action') === 'delete') {
+            putSaved(list.filter(p => String(p.id) !== id));
+            renderSaved();
+          } else {
+            const plan = list.find(p => String(p.id) === id);
+            if (plan) loadPlanIntoCalculator(plan);
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
   </script>
 
   <!-- Load Official Google Translate Script After Main Script Defines googleTranslateElementInit -->
